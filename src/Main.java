@@ -4,5 +4,6 @@ public class Main {
 
         //Open GUI
         MainGUI mainGUI = new MainGUI();
+        Team team = new Team("test", "testing");
     }
 }
