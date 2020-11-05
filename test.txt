@@ -1,9 +1,0 @@
-Task1 null 2 dunno null
-Task2 null 4 dunno Task1
-Task3 null 1 dunno Task2
-Task4 null 3 dunno Task1,Task2
-Task5 null 5 dunno null
-Task6 null 10 dunno Task2
-Task7 null 3 dunno Task5
-Task8 null 2 dunno Task7
-Task9 null 1 dunno null
