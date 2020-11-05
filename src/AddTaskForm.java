@@ -11,13 +11,13 @@ public class AddTaskForm extends CommonUIMethods{
     private JPanel inputPanel;
     private JPanel actionPanel;
     private JTextField taskNameTxt;
-    private JComboBox preReqCombo;
     private JComboBox teamCombo;
     private JTextArea descriptionTxt;
     private JButton addButton;
     private JButton cancelButton;
     private JScrollPane descriptionScrollPanel;
     private JTextField estDaysTxt;
+    private JTextField preReqTxt;
 
     private String taskName;
     private Date estStartDate;
@@ -72,6 +72,8 @@ public class AddTaskForm extends CommonUIMethods{
         taskName = taskNameTxt.getText();
         estDays = Integer.parseInt(estDaysTxt.getText());
         taskDescription = descriptionTxt.getText();
+
+
 
 
         //Main.taskHandler.createTask(taskName, estDays, taskDescription);

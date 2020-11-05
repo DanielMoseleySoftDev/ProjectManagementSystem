@@ -3,10 +3,12 @@ import java.io.Serializable
 import java.util.Date
 
 data class Project(var projectName: String = "Project", var projectStartDate: Date, var projectEndDate: Date? = null, var projectDescription: String) : Serializable{
-    val Teams = mutableListOf<Team>();
-    val Tasks = mutableListOf<Task>();
+    //val Teams = mutableListOf<Team>();
+    val Tasks = TaskHandler()
     init {
 
     }
+
+
 
 }
