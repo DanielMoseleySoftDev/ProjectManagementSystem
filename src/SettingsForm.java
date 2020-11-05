@@ -12,6 +12,9 @@ public class SettingsForm extends CommonUIMethods{
 
         setContentPane(settingsPanel);
         pack();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Settings - Project Management System");
         setVisible(true);
 
         this.addWindowListener(new WindowAdapter() {

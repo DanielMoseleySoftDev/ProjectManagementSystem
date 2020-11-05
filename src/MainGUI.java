@@ -1,6 +1,9 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
 public class MainGUI extends JFrame{
     private JPanel mainPanel;
@@ -18,14 +21,36 @@ public class MainGUI extends JFrame{
     private JButton editTaskButton;
     private JButton deleteProjectButton;
     private JButton settingsButton;
+    private JButton addTeamButton;
+    private JButton editTeamButton;
+    private JButton deleteTeamButton;
+    private JScrollPane activeTaskScrollPanel;
+    private JScrollPane waitingTaskScrollPanel;
+    private JTable activeTaskTable;
+    private JTable waitingTaskTable;
+    private JTable completedTaskTable;
+    private DefaultTableModel activeModel;
+    private DefaultTableModel waitingModel;
+    private DefaultTableModel completeModel;
 
 
     public MainGUI(){
+//        projectHandler = new ProjectHandler();
 
         setContentPane(mainPanel);
         pack();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Project Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        //Setting up the tables
+        createTaskTable("active");
+        createTaskTable("waiting");
+        createTaskTable("completed");
+
+
 
         //--------------ACTION LISTENERS---------------------------------
         settingsButton.addActionListener(new ActionListener() {
@@ -36,12 +61,8 @@ public class MainGUI extends JFrame{
                 settingButtonPressed();
             }
         });
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveButtonPressed();
-            }
-        });
+
+
         openProjectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,11 +106,82 @@ public class MainGUI extends JFrame{
                 deleteProjectButtonPressed();
             }
         });
-        //-----------------------------------------------------------------
+
+        addTeamButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addTeamButtonPressed();
+            }
+        });
+        editTeamButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editTeamButtonPressed();
+            }
+        });
+        deleteTeamButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteTeamButtonPressed();
+            }
+        });
     }
 
+    private void createTaskTable(String type) {
+        System.out.println("Creating Table...");
+
+        if(type == "active") {                                                          //creating active task table
+            String[] columnNames = {"Task Name", "Team", "Due date", "Time Left", "Delay"};
+            activeTaskTable.setModel(new DefaultTableModel(null, columnNames));
+
+            activeModel = (DefaultTableModel) activeTaskTable.getModel();
+
+            System.out.println("...Active Table Created");
+
+
+        }else if(type == "waiting"){                                                    //Creating waiting task table
+
+
+            String[] columnNames = {"Task Name", "Team", "Est Time", "Est. Start", "Prerequisites"};
+            waitingTaskTable.setModel(new DefaultTableModel(null,columnNames));
+            waitingModel = (DefaultTableModel) waitingTaskTable.getModel();
+            System.out.println("...Waiting Table Created");
+
+
+        }else if(type == "completed"){
+            System.out.println("creating Table...");
+            String[] columnNames = {"Task Name", "Team", "Due date", "Time spent"," Delay"};
+            completedTaskTable.setModel(new DefaultTableModel(null, columnNames));
+            completeModel = (DefaultTableModel) completedTaskTable.getModel();
+            System.out.println("Table created");
+        }
+        else{
+            System.out.println("MainGUI Table could not be created. No type stated");
+        }
+
+    }
 
     //----------------BUTTON PRESSED METHODS--------------------------------
+
+    private void deleteTeamButtonPressed() {
+        //todo implement delete
+        System.out.println("delete team button pressed");
+        DeleteTeamForm popout = new DeleteTeamForm(this);
+        this.setEnabled(false);
+    }
+
+    private void editTeamButtonPressed() {
+        System.out.println("edit team button pressed");
+        EditTeamForm popout = new EditTeamForm(this);
+        this.setEnabled(false);
+    }
+
+    private void addTeamButtonPressed() {
+        System.out.println("add team button pressed");
+        AddTeamForm popout = new AddTeamForm(this);
+        this.setEnabled(false);
+    }
+    
     private void deleteProjectButtonPressed() {
         //to do
         System.out.println("delete project button pressed");
@@ -98,31 +190,64 @@ public class MainGUI extends JFrame{
     private void editTaskButtonPressed() {
         //to do
         System.out.println("edit task button pressed");
+        EditTaskForm popout = new EditTaskForm(this);
+        this.setEnabled(false);
     }
 
     private void completeTaskButtonPressed() {
-        //to do
+        //todo : Need to add validation that a task has been selected.
+        //  checkIfTaskSelected()
+        // if selected != null then ... else...
         System.out.println("complete task button pressed");
+
+
     }
 
     private void deleteTaskButtonPressed() {
-        //to do CODE IT
+        //todo : Need to add validation that a task has been selected.
+        //  checkIfTaskSelected()
+        // if selected != null then ... else...
+
+
+
         System.out.println("delete task button pressed");
+
+        //confirmation dialog
+        int result = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to delete?","Confirm Task Delete",
+                JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+
+        if(result == JOptionPane.YES_OPTION){
+            System.out.println("Delete Task Confirmed");
+            //add method for deletion
+        }
+        else{
+            System.out.println("Delete Task Cancelled");
+        }
     }
 
     private void addTaskButtonPressed() {
         //to do CODE IT
         System.out.println("add task button pressed");
+        AddTaskForm popout = new AddTaskForm(this);
+        this.setEnabled(false);
     }
 
     private void addProjectButtonPressed() {
         //to do CODE IT
+
+        AddProjectForm popout = new AddProjectForm(this);
+        this.setEnabled(false);
         System.out.println("add project button pressed");
+
     }
 
     private void openProjectButtonPressed() {
         //to do CODE IT
         System.out.println("openProjectButtonPressed");
+        OpenProjectForm popout = new OpenProjectForm(this);
+        this.setEnabled(false);
+
     }
 
     private void saveButtonPressed() {
