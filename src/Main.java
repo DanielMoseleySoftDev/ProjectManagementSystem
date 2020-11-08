@@ -18,6 +18,7 @@ public class Main {
         new MainGUI();
 
 
+        // --------------TESTING PERSISTENCE - REMOVE - REMOVE----------------------------------------------------------
         Persistence p = new Persistence();
         System.out.println("Persistence object made");
 
