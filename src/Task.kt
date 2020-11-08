@@ -1,6 +1,7 @@
+import java.io.Serializable
 import java.util.*
 
-data class Task(val taskName: String = "Task", val estDays: Int, val estStartDate:  Calendar, var teamAssigned: Team,var taskDescription: String) {
+data class Task(val taskName: String = "Task", val estDays: Int, val estStartDate:  Calendar, var teamAssigned: Team,var taskDescription: String) : Serializable {
     private val taskID: Int = 0
 
     var preReqTasks = mutableListOf<Task>()

@@ -4,7 +4,7 @@ import java.util.Date
 class ProjectHandler() {
 
     //Variables
-    var projects = mutableListOf<Project>()
+    var projects = ArrayList<Project>()
 
     fun createProject(projectName: String, projectStartDate: Date, projectDescription: String) {
         println("ProjectHandler.createProject (Kt)- creating started")
