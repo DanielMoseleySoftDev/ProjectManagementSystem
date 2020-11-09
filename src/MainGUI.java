@@ -37,6 +37,7 @@ public class MainGUI extends JFrame{
     public MainGUI(){
 //        projectHandler = new ProjectHandler();
 
+        System.out.println("--------------------------\nSetting up GUI:");
         setContentPane(mainPanel);
         pack();
         setLocationRelativeTo(null);
@@ -49,6 +50,7 @@ public class MainGUI extends JFrame{
         createTaskTable("active");
         createTaskTable("waiting");
         createTaskTable("completed");
+        System.out.println("--------------------------\n");
 
 
 
@@ -133,8 +135,13 @@ public class MainGUI extends JFrame{
         //update the loaded project of the system
         projectLoadedTxt.setText(Main.projectHandler.getCurrentProject().getProjectName());
         System.out.println("MainGUI.updateLoadedProject -> Updated loadedProjectTxt");
+        updateTaskPanels();
     }
 
+    private void updateTaskPanels() {
+        Main.taskHandler.updateTaskTables(activeModel,waitingModel,completeModel);
+        System.out.println("Task Panels Updated");
+    }
 
 
     private void createTaskTable(String type) {
@@ -159,11 +166,11 @@ public class MainGUI extends JFrame{
 
 
         }else if(type == "completed"){
-            System.out.println("creating Table...");
+
             String[] columnNames = {"Task Name", "Team", "Due date", "Time spent"," Delay"};
             completedTaskTable.setModel(new DefaultTableModel(null, columnNames));
             completeModel = (DefaultTableModel) completedTaskTable.getModel();
-            System.out.println("Table created");
+            System.out.println("...Completed table created");
         }
         else{
             System.out.println("MainGUI Table could not be created. No type stated");

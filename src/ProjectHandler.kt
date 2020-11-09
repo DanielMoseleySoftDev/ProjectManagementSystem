@@ -35,6 +35,8 @@ class ProjectHandler() {
             if (i.projectName == selectedProjectStr){
                 currentProject = i
                 projectFound = true
+                println("ProjectHandler.selectProject -> Selected project found ->set as current project")
+                setProjectTasks()
                 break
             }
 
@@ -43,10 +45,13 @@ class ProjectHandler() {
         //print to console if no project is found
         if (!projectFound){
             println("ProjectHandler.selectProject -> Selected Project not found")
-        }else{
-            println("ProjectHandler.selectProject -> Selected project found ->set as current project")
         }
     }
 
+    private fun setProjectTasks(){
+        Main.taskHandler.tasks = currentProject.Tasks
+        println("ProjectHandler.selectProject -> Main.taskHandler.tasks set to currentProjects tasks:\n"+Main.taskHandler.tasks)
+
+    }
 }
 
