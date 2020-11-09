@@ -11,15 +11,16 @@ public class Main {
     public static TeamHandler teamHandler;
 
     public static void main(String[] args) {
-        projectHandler = new ProjectHandler();
+
         taskHandler = new TaskHandler();
         teamHandler = new TeamHandler();
+        projectHandler = new ProjectHandler();
         //Open GUI
         new MainGUI();
 
 
         // --------------TESTING PERSISTENCE - REMOVE - REMOVE----------------------------------------------------------
-        Persistence p = new Persistence();
+        /*Persistence p = new Persistence();
         System.out.println("Persistence object made");
 
         System.out.println("Creating test projects");
@@ -47,7 +48,7 @@ public class Main {
         for(int i = 0; i<projectHandler.getProjects().size();i++){
             System.out.println(projectHandler.getProjects().get(i));
         }
-        System.out.println("\nProject1 task: "+ projectHandler.getProjects().get(0).getTasks());
+        System.out.println("\nProject1 task: "+ projectHandler.getProjects().get(0).getTasks());*/
     }
 
 }
