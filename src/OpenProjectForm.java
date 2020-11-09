@@ -57,7 +57,9 @@ public class OpenProjectForm extends CommonUIMethods{
     }
 
     private void openButtonPressed(MainGUI mainFrame) {
-        //todo implement openButtonPressed
+        //Button implemented    - Gets the selected name of project from combo-box
+        //                      - Sets the current project in ProjectHandler
+        //                      - Calls function in the main gui to update its loaded project
 
         System.out.println("OpenProjectForm.openButtonPressed");
         String selected = projectSelectCombo.getSelectedItem().toString();

@@ -4,6 +4,7 @@ import kotlin.collections.ArrayList
 
 data class Task(val taskName: String = "Task", val estDays: Int, val estStartDate:  Calendar, var teamAssigned: Team,var taskDescription: String) : Serializable {
     private val taskID: Int = 0
+    var status = TaskStatus.NO_STATUS
 
     var preReqTasks = ArrayList<Task>()
 
@@ -22,4 +23,8 @@ data class Task(val taskName: String = "Task", val estDays: Int, val estStartDat
        //     preReqTasks = preReq as ArrayList<Task>
         //}
     }
+}
+
+enum class TaskStatus{
+    ACTIVE,WAITING,COMPLETE,NO_STATUS
 }
