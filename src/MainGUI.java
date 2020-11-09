@@ -127,6 +127,16 @@ public class MainGUI extends JFrame{
         });
     }
 
+
+    public void updateLoadedProject(){
+        //todo this method needs to be updated so that all project loaded stuff goes through here
+        //update the loaded project of the system
+        projectLoadedTxt.setText(Main.projectHandler.getCurrentProject().getProjectName());
+        System.out.println("MainGUI.updateLoadedProject -> Updated loadedProjectTxt");
+    }
+
+
+
     private void createTaskTable(String type) {
         System.out.println("Creating Table...");
 

@@ -12,7 +12,7 @@ public class OpenProjectForm extends CommonUIMethods{
     private JButton openButton;
     private JButton cancelButton;
 
-    public OpenProjectForm(JFrame mainFrame) {
+    public OpenProjectForm(MainGUI mainFrame) {
 
         setContentPane(openProjectPanel);
         pack();
@@ -39,7 +39,7 @@ public class OpenProjectForm extends CommonUIMethods{
         openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                openButtonPressed();
+                openButtonPressed(mainFrame);
             }
         });
     }
@@ -49,20 +49,25 @@ public class OpenProjectForm extends CommonUIMethods{
     //----------------Methods-----------------------------------------------
 
     private void populateComboBox() {
+        System.out.println("OpenProjectForm.populateComboBox");
         for(int i=0;i<Main.projectHandler.getProjects().size();i++){
 
             projectSelectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
         }
     }
 
-    private void openButtonPressed() {
+    private void openButtonPressed(MainGUI mainFrame) {
         //todo implement openButtonPressed
 
         System.out.println("OpenProjectForm.openButtonPressed");
+        String selected = projectSelectCombo.getSelectedItem().toString();
+        Main.projectHandler.selectProject(selected);
+        mainFrame.updateLoadedProject();
+        onExit(mainFrame);
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
-        //todo implement cancelButtonPressed
+
         System.out.println("OpenProjectForm.cancelButtonPressed");
         onExit(mainFrame);
     }
