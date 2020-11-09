@@ -19,6 +19,7 @@ public class OpenProjectForm extends CommonUIMethods{
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Open Project - Project Management System");
+        populateComboBox();
         setVisible(true);
 
         this.addWindowListener(new WindowAdapter() {
@@ -43,7 +44,17 @@ public class OpenProjectForm extends CommonUIMethods{
         });
     }
 
+
+
     //----------------Methods-----------------------------------------------
+
+    private void populateComboBox() {
+        for(int i=0;i<Main.projectHandler.getProjects().size();i++){
+
+            projectSelectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
+        }
+    }
+
     private void openButtonPressed() {
         //todo implement openButtonPressed
 
