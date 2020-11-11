@@ -18,7 +18,7 @@ class TeamHandler {
     }
 
     fun deleteTeam(teamIndex: Int) {
-        teams.removeAt(teamIndex);
+        teams.removeAt(teamIndex)
         saveTeams()
     }
 

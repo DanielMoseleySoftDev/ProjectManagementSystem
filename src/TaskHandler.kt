@@ -90,9 +90,40 @@ class TaskHandler() {
         Main.projectHandler.saveProjects()
         mainFrame.updateTaskPanels()
     }
+    fun findTask(taskName: String):Task{
+        tasks.forEach { task ->
+            if(taskName == task.taskName){
+                return task
+            }
+        }
+        return tasks[0]
+    }
+
+    fun deleteTask(selectedTaskIndex: Int, selectedTaskName: String) {
+
+
+        tasks.removeAt(selectedTaskIndex)
+        removeTaskFromPreReq(selectedTaskName)
+
+        Main.projectHandler.saveProjects()
+    }
+
+    private fun removeTaskFromPreReq(selectedTaskName: String) {
+        //TODO("Not yet implemented")
+        println("TaskHandler.deleteTask.removeFromPreReq -> removing deleted task from pre-req's")
+        for (i in tasks){
+            for (j in i.preReqTasks){
+                if (selectedTaskName == j.taskName){
+                    i.preReqTasks.remove(j)
+                    calculateTaskStatus(i)  //recalculating the statuses
+                }
+            }
+        }
+        println("TaskHandler.deleteTask.removeFromPreReq -> deleted task from pre-req removed")
+    }
 
     private fun calculateEstStartDate() : Calendar{
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
         var calendar = Calendar.getInstance()
         calendar.set(2020, 11, 5)
         return calendar
