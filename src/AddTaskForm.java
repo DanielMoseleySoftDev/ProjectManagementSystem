@@ -95,15 +95,9 @@ public class AddTaskForm extends CommonUIMethods{
 
 
     private void populateComboBox() {
-
-        System.out.println("AddTaskForm.populateComboBox");
-        /*for(int i=0;i<Main.projectHandler.getProjects().size();i++){
-
-            projectSelectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
-        }*/
-        teamCombo.addItem("A");
-        teamCombo.addItem("B");
-        teamCombo.addItem("C");
+        for (int i=0; i<Main.teamHandler.getTeams().size();i++) {
+            teamCombo.addItem(Main.teamHandler.getTeams().get(i).getTeamName());
+        }
     }
 
 

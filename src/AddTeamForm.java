@@ -44,13 +44,13 @@ public class AddTeamForm extends CommonUIMethods{
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addButtonPressed();
+                addButtonPressed(mainFrame);
             }
         });
     }
 
     //--------Methods---------------------------------------------
-    private void addButtonPressed() {
+    private void addButtonPressed(JFrame mainFrame) {
         //todo implement addButtonPressed
         System.out.println("AddTeamForm.addButtonPressed");
         teamName = nameTxt.getText();
@@ -58,6 +58,7 @@ public class AddTeamForm extends CommonUIMethods{
 
         Main.teamHandler.createTeam(teamName, teamDescription);
         System.out.println("Team created \n" + Main.teamHandler.getTeams());
+        onExit(mainFrame);
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
