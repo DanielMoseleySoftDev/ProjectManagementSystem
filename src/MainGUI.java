@@ -138,7 +138,7 @@ public class MainGUI extends JFrame{
         updateTaskPanels();
     }
 
-    private void updateTaskPanels() {
+    public void updateTaskPanels() {
         Main.taskHandler.updateTaskTables(activeModel,waitingModel,completeModel);
         System.out.println("Task Panels Updated");
     }

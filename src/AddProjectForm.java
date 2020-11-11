@@ -26,7 +26,7 @@ public class AddProjectForm extends CommonUIMethods{
     private Date startDate;
     private String Description;
 
-    public AddProjectForm(JFrame mainFrame){
+    public AddProjectForm(MainGUI mainFrame){
 
         setContentPane(addProjectPanel);
         pack();
@@ -69,7 +69,7 @@ public class AddProjectForm extends CommonUIMethods{
 
     }
 
-    private void addButtonPressed(JFrame mainFrame) throws ParseException {
+    private void addButtonPressed(MainGUI mainFrame) throws ParseException {
         //todo implement addButtonPressed
         System.out.println("AddProjectForm.addButtonPressed");
 
@@ -78,9 +78,10 @@ public class AddProjectForm extends CommonUIMethods{
         Date startDate = dateFormat.parse(dateTxt.getText());
         Main.projectHandler.createProject(projectName, startDate, description);
         System.out.println("Added project to list of projects:\n"+Main.projectHandler.getProjects());
+        mainFrame.updateLoadedProject();
+        onExit(mainFrame);
 
 
-        //todo load the created
 
     }
 }

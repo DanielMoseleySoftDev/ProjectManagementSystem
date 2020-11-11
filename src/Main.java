@@ -27,11 +27,12 @@ public class Main {
         projectHandler.getProjects().add(new Project("Project1", new Date(), new Date(), "String test project 1"));
         projectHandler.getProjects().add(new Project("Project2", new Date(), new Date(), "String test project 2"));
         projectHandler.getProjects().add(new Project("Project3", new Date(), new Date(), "String test project 3"));
-        projectHandler.getProjects().add(new Project("Project3", new Date(), new Date(), "String test project 3"));
+        projectHandler.getProjects().add(new Project("Project4", new Date(), new Date(), "String test project 4"));
 
-        Calendar c = Calendar.getInstance();
+        //Calendar c = Calendar.getInstance();
         ArrayList<Task> tks = new ArrayList<Task>();
-        tks.add(new Task("task1",5,c,new Team("team a","blahh"),"task description"));
+
+        tks.add(new Task("task1",5,teamHandler.getTeams().get(0),"Example Task1",new ArrayList<Task>()));
         projectHandler.getProjects().get(0).setTasks(tks);
 
 

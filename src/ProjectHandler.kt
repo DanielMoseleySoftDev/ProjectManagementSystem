@@ -16,7 +16,12 @@ class ProjectHandler() {
         println("ProjectHandler.createProject (Kt)- creating started")
         projects.add(Project(projectName, projectStartDate, projectDescription = projectDescription))
         println("ProjectHandler.createProject (Kt)- created")
-        //projects would then be save to db
+        //projects would then be save to file
+        saveProjects()
+
+        selectProject(projects.last().projectName)
+
+
 
     }
 
@@ -24,6 +29,15 @@ class ProjectHandler() {
         projects = p.loadFromFile()
         println(projects)
         println("Project1 task: "+ projects[0].Tasks +"\n")
+
+    }
+
+    fun saveProjects(){
+
+        p.saveToFile(projects)
+        println(projects+"\n")
+
+
 
     }
 

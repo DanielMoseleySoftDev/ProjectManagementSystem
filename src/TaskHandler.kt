@@ -1,10 +1,11 @@
 import java.util.*
 import javax.swing.table.DefaultTableModel
+import kotlin.collections.ArrayList
 
 
 class TaskHandler() {
 
-    var tasks = mutableListOf<Task>()
+    var tasks = ArrayList<Task>()
 
     init{
 
@@ -25,12 +26,12 @@ class TaskHandler() {
 
                 val checkResult = checkTaskStatus(i)
                 if(checkResult == "ACTIVE"){
-                    activeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName,"NA","NA","NA"))
+                    activeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, "NA", "NA", "NA"))
                 }else if(checkResult == "WAITING"){
-                    waitingTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName,i.estDays,"NA","?"))
+                    waitingTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, i.estDays, "NA", "?"))
 
                 }else if(checkResult == "COMPLETE"){
-                    completeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName,"NA","NA","NA"))
+                    completeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, "NA", "NA", "NA"))
                 }
 
             }
@@ -64,14 +65,18 @@ class TaskHandler() {
     }
 
 
-    fun createTask(taskName: String = "Task", estDays: Int, teamAssigned: Team, taskDescription: String){
+    fun createTask(taskName: String = "Task", estDays: Int, teamAssigned: Team, taskDescription: String, preReq: String,mainFrame:MainGUI){
         //TODO::: MAKE SURE TASK STATUS IS CALCULATED HERE IMMEDIATELY AFTER OBJECT CREATION
         println("TaskHandler.createTask started")
 
-        var estStartDate = calculateEstStartDate()
+        //var estStartDate = calculateEstStartDate()
         //var estStartDate : Calendar = Calenda
-        tasks.add(Task(taskName, estDays, estStartDate, teamAssigned, taskDescription))
-        println("Task created -> \n" + tasks)
+        val preReqList = getPreReq(preReq)
+        tasks.add(Task(taskName, estDays, teamAssigned, taskDescription, preReqList))
+        calculateTaskStatus(tasks.last())
+        println("Task created -> \n$tasks")
+        Main.projectHandler.saveProjects()
+        mainFrame.updateTaskPanels()
     }
 
     private fun calculateEstStartDate() : Calendar{
@@ -108,4 +113,29 @@ class TaskHandler() {
 
 
     }
+
+    private fun getPreReq(preReq: String): ArrayList<Task> {
+        val returnList = ArrayList<Task>()
+        return if (preReq.isEmpty()) {
+            returnList
+        } else {
+            //split the string
+            val temp: Array<String> = preReq.split(", ".toRegex()).toTypedArray()
+            val thTask = Main.taskHandler.tasks
+
+            //loops through list of user input and checks them against each task in task handler
+            for (i in temp.indices) {
+                for (j in thTask.indices) {
+                    if (temp[i] == thTask[j].taskName) {
+                        returnList.add(thTask[j])
+                        println("Added Pre Req Task: " + thTask[j])
+                    }
+                }
+            }
+            returnList
+        }
+    }
+
+
+
 }

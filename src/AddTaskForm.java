@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AddTaskForm extends CommonUIMethods{
@@ -23,18 +24,20 @@ public class AddTaskForm extends CommonUIMethods{
     private Date estStartDate;
     private Date estFinishDate;
     private int estDays;
-    private String team;
+    private Team team;
     private String taskDescription;
+    private String preReq;
 
 
 
-    public AddTaskForm(JFrame mainFrame){
+    public AddTaskForm(MainGUI mainFrame){
 
         setContentPane(addTaskPanel);
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Add Task - Project Management System");
+        populateComboBox();
         setVisible(true);
 
         this.addWindowListener(new WindowAdapter() {
@@ -56,7 +59,7 @@ public class AddTaskForm extends CommonUIMethods{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    addButtonPressed();
+                    addButtonPressed(mainFrame);
                 } catch (NumberFormatException f) {
                     System.out.println("Add Task form - wrong format");
                 }
@@ -65,25 +68,71 @@ public class AddTaskForm extends CommonUIMethods{
         });
     }
 
+
+
     //-------------Methods-----------------------------------------
-    private void addButtonPressed() throws NumberFormatException {
+    private void addButtonPressed(MainGUI mainFrame) throws NumberFormatException {
         //todo implement addButtonPressed
         System.out.println("AddTaskForm.addButtonPressed");
         taskName = taskNameTxt.getText();
         estDays = Integer.parseInt(estDaysTxt.getText());
         taskDescription = descriptionTxt.getText();
-
-
-
-
+        String teamName = teamCombo.getSelectedItem().toString();
+        team = Main.teamHandler.findTeam(teamName);
+        preReq = preReqTxt.getText();
+        //ArrayList<Task> preReqList = getPreReq();
+        Main.taskHandler.createTask(taskName,estDays,team,taskDescription,preReq,mainFrame);
+        onExit(mainFrame);
         //Main.taskHandler.createTask(taskName, estDays, taskDescription);
         //TODO Team variable for task information?
     }
-
 
     private void cancelButtonPressed(JFrame mainFrame) {
         //todo implement cancelButtonPressed
         System.out.println("AddTaskForm.cancelButtonPressed");
         onExit(mainFrame);
     }
+
+
+    private void populateComboBox() {
+
+        System.out.println("AddTaskForm.populateComboBox");
+        /*for(int i=0;i<Main.projectHandler.getProjects().size();i++){
+
+            projectSelectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
+        }*/
+        teamCombo.addItem("A");
+        teamCombo.addItem("B");
+        teamCombo.addItem("C");
+    }
+
+
+
+    private ArrayList<Task> getPreReq() {
+
+        ArrayList<Task> returnList = new ArrayList<>();
+
+        if(preReq.isEmpty()){
+            return returnList;
+        }else{
+            //split the string
+            String[] temp = preReq.split(", ");
+            ArrayList<Task> thTask = Main.taskHandler.getTasks();
+
+            //loops through list of user input and checks them against each task in task handler
+            for(int i = 0; i< temp.length;i++){
+                for(int j=0;j<thTask.size();j++){
+                    if(temp[i] == thTask.get(j).getTaskName()) {
+                        returnList.add(thTask.get(j));
+                        System.out.println("Added Pre Req Task: " + thTask.get(j));
+                    }
+                }
+            }
+            return returnList;
+        }
+
+
+    }
+
+
 }

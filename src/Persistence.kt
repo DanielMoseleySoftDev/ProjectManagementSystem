@@ -35,7 +35,7 @@ class Persistence {
         try {
             //uses lambda to de-serialize the file into array of projects
             projectList = ObjectInputStream(FileInputStream(file)).use {it -> it.readObject() as ArrayList<Project>}
-
+            println("Projects Loaded into memory")
 
         }catch (ioe : IOException){
             println("Error: Could not load from file:\n $file")
@@ -45,7 +45,7 @@ class Persistence {
             return nullList
         }
 
-        println("Projects Loaded into memory")
+
         return projectList
     }
 }

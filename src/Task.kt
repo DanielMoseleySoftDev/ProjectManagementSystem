@@ -2,11 +2,11 @@ import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
-data class Task(val taskName: String = "Task", val estDays: Int, val estStartDate:  Calendar, var teamAssigned: Team,var taskDescription: String) : Serializable {
-    private val taskID: Int = 0
+data class Task(val taskName: String = "Task", val estDays: Int,  var teamAssigned: Team,var taskDescription: String, var preReqTasks: ArrayList<Task>) : Serializable {
+
     var status = TaskStatus.NO_STATUS
 
-    var preReqTasks = ArrayList<Task>()
+
 
     var delayTime: Int = 0
     var estFinishDate: Date? = null
