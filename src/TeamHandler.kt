@@ -17,6 +17,13 @@ class TeamHandler {
         return teams[0]
     }
 
+    fun deleteTeam(teamIndex: Int) {
+        teams.removeAt(teamIndex);
+        saveTeams()
+    }
+
+
+
     fun loadTeams() {
         teams = p.loadFromFile(true)
         println(teams)
@@ -30,8 +37,6 @@ class TeamHandler {
 
     init{
         teams.add(Team("N/A","No team assigned"))
-        teams.add(Team("A","Team A"))
-        teams.add(Team("B","Team B"))
-        teams.add(Team("C","Team C"))
+        loadTeams()
     }
 }

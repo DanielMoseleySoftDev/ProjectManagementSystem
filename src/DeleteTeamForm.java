@@ -19,6 +19,7 @@ public class DeleteTeamForm extends CommonUIMethods{
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Delete Team - Project Management System");
+        populateComboBox();
         setVisible(true);
 
         this.addWindowListener(new WindowAdapter() {
@@ -38,20 +39,31 @@ public class DeleteTeamForm extends CommonUIMethods{
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deleteButtonPressed();
+                deleteButtonPressed(mainFrame);
             }
         });
     }
 
     //------------Methods--------------------------------------------------
-    private void deleteButtonPressed() {
+    private void deleteButtonPressed(JFrame mainFrame) {
         //todo implement delete team
+        String selectedTeam = teamCombo.getSelectedItem().toString();
+        Team foundTeam = Main.teamHandler.findTeam(selectedTeam);
+        int teamIndex = Main.teamHandler.getTeams().indexOf(foundTeam);
+        Main.teamHandler.deleteTeam(teamIndex);
+
         System.out.println("DeleteTeamForm.deleteButtonPressed");
+        onExit(mainFrame);
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
         //todo implement cancelButtonPressed
         System.out.println("DeleteTeamForm.cancelButtonPressed");
         onExit(mainFrame);
+    }
+    private void populateComboBox() {
+        for (int i=0; i<Main.teamHandler.getTeams().size();i++) {
+            teamCombo.addItem(Main.teamHandler.getTeams().get(i).getTeamName());
+        }
     }
 }
