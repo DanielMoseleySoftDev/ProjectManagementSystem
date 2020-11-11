@@ -28,7 +28,13 @@ class TaskHandler() {
                 if(checkResult == "ACTIVE"){
                     activeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, "NA", "NA", "NA"))
                 }else if(checkResult == "WAITING"){
-                    waitingTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, i.estDays, "NA", getPreReqToString(i)))
+                    waitingTable.addRow(
+                        arrayOf<Any>(
+                            i.taskName, i.teamAssigned.teamName, i.estDays, "NA", getPreReqToString(
+                                i
+                            )
+                        )
+                    )
 
                 }else if(checkResult == "COMPLETE"){
                     completeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, "NA", "NA", "NA"))
@@ -42,7 +48,7 @@ class TaskHandler() {
 
     }
 
-    fun getPreReqToString(task : Task) : String{
+    fun getPreReqToString(task: Task) : String{
         var taskStr =""
         for(i in task.preReqTasks){
             taskStr += i.taskName+", "
@@ -77,7 +83,14 @@ class TaskHandler() {
     }
 
 
-    fun createTask(taskName: String = "Task", estDays: Int, teamAssigned: Team, taskDescription: String, preReq: String,mainFrame:MainGUI){
+    fun createTask(
+        taskName: String = "Task",
+        estDays: Int,
+        teamAssigned: Team,
+        taskDescription: String,
+        preReq: String,
+        mainFrame: MainGUI
+    ){
         //TODO::: MAKE SURE TASK STATUS IS CALCULATED HERE IMMEDIATELY AFTER OBJECT CREATION
         println("TaskHandler.createTask started")
 
@@ -99,12 +112,12 @@ class TaskHandler() {
         return tasks[0]
     }
 
-    fun deleteTask(selectedTaskIndex: Int, selectedTaskName: String) {
+    fun deleteTask(selectedTaskIndex: Int, selectedTaskName: String, mainFrame: MainGUI) {
 
 
         tasks.removeAt(selectedTaskIndex)
         removeTaskFromPreReq(selectedTaskName)
-
+        mainFrame.updateTaskPanels()
         Main.projectHandler.saveProjects()
     }
 
@@ -115,10 +128,16 @@ class TaskHandler() {
             for (j in i.preReqTasks){
                 if (selectedTaskName == j.taskName){
                     i.preReqTasks.remove(j)
-                    calculateTaskStatus(i)  //recalculating the statuses
+                    break
+                    //calculateTaskStatus(i)  //recalculating the statuses
                 }
             }
+            //calculateTaskStatus(i)
         }
+        for(i in tasks){
+            calculateTaskStatus(i)
+        }
+
         println("TaskHandler.deleteTask.removeFromPreReq -> deleted task from pre-req removed")
     }
 

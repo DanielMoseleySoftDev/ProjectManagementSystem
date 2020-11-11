@@ -53,8 +53,8 @@ public class DeleteTaskForm extends CommonUIMethods{
         String selectedTask = taskCombo.getSelectedItem().toString();
         Task foundTask = Main.taskHandler.findTask(selectedTask);
         int taskIndex = Main.taskHandler.getTasks().indexOf(foundTask);
-        Main.taskHandler.deleteTask(taskIndex, selectedTask);
-        mainFrame.updateTaskPanels();
+        Main.taskHandler.deleteTask(taskIndex, selectedTask, mainFrame);
+
         System.out.println("DeleteTeamForm.deleteButtonPressed");
         onExit(mainFrame);
     }
