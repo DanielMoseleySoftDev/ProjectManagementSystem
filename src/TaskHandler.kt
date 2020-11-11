@@ -28,7 +28,7 @@ class TaskHandler() {
                 if(checkResult == "ACTIVE"){
                     activeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, "NA", "NA", "NA"))
                 }else if(checkResult == "WAITING"){
-                    waitingTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, i.estDays, "NA", "?"))
+                    waitingTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, i.estDays, "NA", getPreReqToString(i)))
 
                 }else if(checkResult == "COMPLETE"){
                     completeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, "NA", "NA", "NA"))
@@ -40,6 +40,18 @@ class TaskHandler() {
 
 
 
+    }
+
+    fun getPreReqToString(task : Task) : String{
+        var taskStr =""
+        for(i in task.preReqTasks){
+            taskStr += i.taskName+", "
+        }
+        return if(taskStr.isNullOrBlank()){
+            "?"
+        }else{
+            taskStr
+        }
     }
 
     private fun checkTaskStatus(i: Task): String {
