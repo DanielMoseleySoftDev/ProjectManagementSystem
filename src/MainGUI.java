@@ -221,26 +221,10 @@ public class MainGUI extends JFrame{
     }
 
     private void deleteTaskButtonPressed() {
-        //todo : Need to add validation that a task has been selected.
-        //  checkIfTaskSelected()
-        // if selected != null then ... else...
-
-
-
         System.out.println("delete task button pressed");
+        DeleteTaskForm popout = new DeleteTaskForm(this);
+        this.setEnabled(false);
 
-        //confirmation dialog
-        int result = JOptionPane.showConfirmDialog(this,
-                "Are you sure you want to delete?","Confirm Task Delete",
-                JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
-
-        if(result == JOptionPane.YES_OPTION){
-            System.out.println("Delete Task Confirmed");
-            //add method for deletion
-        }
-        else{
-            System.out.println("Delete Task Cancelled");
-        }
     }
 
     private void addTaskButtonPressed() {
