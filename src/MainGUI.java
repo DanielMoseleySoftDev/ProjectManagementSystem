@@ -1,9 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
 
 public class MainGUI extends JFrame{
     private JPanel mainPanel;
@@ -20,7 +18,7 @@ public class MainGUI extends JFrame{
     private JButton completeTaskButton;
     private JButton editTaskButton;
     private JButton deleteProjectButton;
-    private JButton settingsButton;
+    private JButton CriticalButton;
     private JButton addTeamButton;
     private JButton editTeamButton;
     private JButton deleteTeamButton;
@@ -29,6 +27,8 @@ public class MainGUI extends JFrame{
     private JTable activeTaskTable;
     private JTable waitingTaskTable;
     private JTable completedTaskTable;
+    private JComboBox scalaorkotlin;
+    private JProgressBar progressBar1;
     private DefaultTableModel activeModel;
     private DefaultTableModel waitingModel;
     private DefaultTableModel completeModel;
@@ -44,6 +44,7 @@ public class MainGUI extends JFrame{
         setResizable(false);
         setTitle("Project Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setVisible(true);
 
         //Setting up the tables
@@ -51,17 +52,15 @@ public class MainGUI extends JFrame{
         createTaskTable("waiting");
         createTaskTable("completed");
         System.out.println("--------------------------\n");
+        scalaorkotlin.addItem("Kotlin");
+        scalaorkotlin.addItem("Scala");
 
 
 
         //--------------ACTION LISTENERS---------------------------------
-        settingsButton.addActionListener(new ActionListener() {
+        CriticalButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-
-
-                settingButtonPressed();
-            }
+            public void actionPerformed(ActionEvent e) { criticalButtonPressed(); }
         });
 
 
@@ -256,16 +255,8 @@ public class MainGUI extends JFrame{
 
     }
 
-    private void saveButtonPressed() {
-        //to do CODE IT
-        System.out.println("Save button pressed");
-    }
-
-    private void settingButtonPressed() {
-
-        SettingsForm popout = new SettingsForm(this);
-        this.setEnabled(false);
-        System.out.println("SettingsButtonPressed");
+    private void criticalButtonPressed() {
+        System.out.println("CriticalButtonPressed");
 
     }
 
