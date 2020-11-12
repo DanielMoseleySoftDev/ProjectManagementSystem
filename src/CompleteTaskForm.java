@@ -52,6 +52,7 @@ public class CompleteTaskForm extends CommonUIMethods{
         String selectedTask = taskCombo.getSelectedItem().toString();
 
         Main.taskHandler.completeTask(selectedTask, mainFrame);
+        onExit(mainFrame);
     }
 
     private void populateComboBox() {

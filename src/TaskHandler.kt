@@ -194,8 +194,13 @@ class TaskHandler() {
 
         }
         else{
-            task.status = TaskStatus.ACTIVE
-            println("TaskHandler.calculateTaskStatus -> Status=ACTIVE")
+            if(task.status==TaskStatus.COMPLETE){
+                println("TaskHandler.calculateTaskStatus -> Task is Complete")
+            }else{
+                task.status = TaskStatus.ACTIVE
+                println("TaskHandler.calculateTaskStatus -> Status=ACTIVE")
+            }
+
         }
 
 

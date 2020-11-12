@@ -102,17 +102,9 @@
               <text value="+ TASK"/>
             </properties>
           </component>
-          <component id="3f504" class="javax.swing.JButton" binding="deleteTaskButton" default-binding="true">
-            <constraints>
-              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Delete Task"/>
-            </properties>
-          </component>
           <component id="f5ed9" class="javax.swing.JButton" binding="completeTaskButton" default-binding="true">
             <constraints>
-              <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Complete Task"/>
@@ -120,7 +112,7 @@
           </component>
           <component id="e244f" class="javax.swing.JButton" binding="editTaskButton" default-binding="true">
             <constraints>
-              <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Edit Task"/>
@@ -228,6 +220,14 @@
             </constraints>
             <properties>
               <text value="Critical Path"/>
+            </properties>
+          </component>
+          <component id="3f504" class="javax.swing.JButton" binding="deleteTaskButton" default-binding="true">
+            <constraints>
+              <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Delete Task"/>
             </properties>
           </component>
         </children>

@@ -25,6 +25,21 @@ class ProjectHandler() {
 
     }
 
+    fun deleteProject(projectIndex: Int){
+        projects.removeAt(projectIndex)
+        saveProjects()
+        currentProject = Project("No Project Selected",projectStartDate = Date(),projectDescription = "No project selected")
+        Main.taskHandler.tasks.clear()
+    }
+    fun findProject(projectName : String) : Project{
+        projects.forEach { project ->
+            if(projectName == project.projectName){
+                return project
+            }
+        }
+        return projects[0]
+    }
+
     fun loadProjects(){
         projects = p.loadFromFile()
         println(projects)
