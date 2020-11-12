@@ -51,7 +51,7 @@ class TaskHandler() {
     }
 
     fun getPreReqToString(task: Task) : String{
-        println("TaskHandler.getPreqToString")
+        println("TaskHandler.getPreReqToString")
         var taskStr =""
         for(i in task.preReqTasks){
             taskStr += i.taskName+", "
