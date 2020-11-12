@@ -128,7 +128,7 @@ class TaskHandler() {
     fun completeTask(taskIndex: Int, mainFrame: MainGUI){
 
         tasks[taskIndex].status = TaskStatus.COMPLETE
-
+        println(tasks[taskIndex].status)//checking if it works
 
         mainFrame.updateTaskPanels()
         Main.projectHandler.saveProjects()
