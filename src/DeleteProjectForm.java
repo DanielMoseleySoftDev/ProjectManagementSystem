@@ -52,8 +52,9 @@ public class DeleteProjectForm extends CommonUIMethods{
         String selectedProject = projectCombo.getSelectedItem().toString();
         Project foundProject = Main.projectHandler.findProject(selectedProject);
         int projectIndex = Main.projectHandler.getProjects().indexOf(foundProject);
-        Main.projectHandler.deleteProject(projectIndex);
 
+        //Main.projectHandler.deleteProject(projectIndex);
+        mainFrame.setLoadedFlag(Main.projectHandler.deleteProject(projectIndex));
         mainFrame.updateLoadedProject();
         onExit(mainFrame);
     }

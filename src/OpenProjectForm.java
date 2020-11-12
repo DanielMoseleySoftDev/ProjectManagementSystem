@@ -64,6 +64,7 @@ public class OpenProjectForm extends CommonUIMethods{
         System.out.println("OpenProjectForm.openButtonPressed");
         String selected = projectSelectCombo.getSelectedItem().toString();
         Main.projectHandler.selectProject(selected);
+        mainFrame.setLoadedFlag(true);
         mainFrame.updateLoadedProject();
         onExit(mainFrame);
     }
