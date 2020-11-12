@@ -4,21 +4,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class DeleteTaskForm extends CommonUIMethods{
-    private JPanel deleteTaskPanel;
+public class CompleteTaskForm extends CommonUIMethods{
+    private JPanel completeTaskPanel;
+    private JButton completeButton;
+    private JButton cancelButton;
     private JPanel inputPanel;
     private JPanel actionPanel;
     private JComboBox taskCombo;
-    private JButton deleteButton;
-    private JButton cancelButton;
 
-
-    public DeleteTaskForm(MainGUI mainFrame) {
-        setContentPane(deleteTaskPanel);
+    public CompleteTaskForm(MainGUI mainFrame) {
+        setContentPane(completeTaskPanel);
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Delete Task - Project Management System");
+        setTitle("Complete task - Project Management System");
         populateComboBox();
         setVisible(true);
 
@@ -28,34 +27,31 @@ public class DeleteTaskForm extends CommonUIMethods{
             }
         }); //unfreezes main gui when pop out is closed
 
-        //-------Action Listeners-------------------------
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deleteButtonPressed(mainFrame);
-            }
-        });
+        //---------------Action Listeners----------------------------
         cancelButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                cancelButtonPressed(mainFrame);
+            public void actionPerformed(ActionEvent e) { completeButtonPressed(mainFrame);
+
+            }
+        });
+        completeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { cancelButtonPressed(mainFrame);
+
             }
         });
     }
-    //-------Methods-----------------------------------------------
+
     private void cancelButtonPressed(JFrame mainFrame) {
-        System.out.println("DeleteTaskForm.cancelButtonPressed");
+        System.out.println("CancelTaskForm.cancelButtonPressed");
         onExit(mainFrame);
     }
 
-    private void deleteButtonPressed(MainGUI mainFrame) {
+    private void completeButtonPressed(MainGUI mainFrame) {
         String selectedTask = taskCombo.getSelectedItem().toString();
         Task foundTask = Main.taskHandler.findTask(selectedTask);
         int taskIndex = Main.taskHandler.getTasks().indexOf(foundTask);
-        Main.taskHandler.deleteTask(taskIndex, selectedTask, mainFrame);
-
-        System.out.println("DeleteTeamForm.deleteButtonPressed");
-        onExit(mainFrame);
+        Main.taskHandler.completeTask(taskIndex, mainFrame);
     }
 
     private void populateComboBox() {
@@ -63,5 +59,4 @@ public class DeleteTaskForm extends CommonUIMethods{
             taskCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());
         }
     }
-
 }

@@ -121,6 +121,14 @@ class TaskHandler() {
         Main.projectHandler.saveProjects()
     }
 
+    fun completeTask(selectedTaskIndex: Int, mainFrame: MainGUI){
+
+
+
+        mainFrame.updateTaskPanels()
+        Main.projectHandler.saveProjects()
+    }
+
     private fun removeTaskFromPreReq(selectedTaskName: String) {
         //TODO("Not yet implemented")
         println("TaskHandler.deleteTask.removeFromPreReq -> removing deleted task from pre-req's")
