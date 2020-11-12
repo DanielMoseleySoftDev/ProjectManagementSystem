@@ -16,11 +16,13 @@ class TaskHandler() {
         waitingTable: DefaultTableModel,
         completeTable: DefaultTableModel
     ){
-
+        println("TaskHandler.updateTaskTables -> update started")
+        println("TaskHandler.updateTaskTables -> clearing tables")
         activeTable.setNumRows(0)
         waitingTable.setNumRows(0)
         completeTable.setNumRows(0)
 
+        println("TaskHandler.updateTaskTables -> adding tasks to rows")
         if(tasks.isNotEmpty()){
             for(i in tasks){
 
@@ -44,11 +46,12 @@ class TaskHandler() {
 
         }
 
-
+        println("TaskHandler.updateTaskTables -> tables updated")
 
     }
 
     fun getPreReqToString(task: Task) : String{
+        println("TaskHandler.getPreqToString")
         var taskStr =""
         for(i in task.preReqTasks){
             taskStr += i.taskName+", "
@@ -61,6 +64,7 @@ class TaskHandler() {
     }
 
     private fun checkTaskStatus(i: Task): String {
+        println("TaskHandler.checkTaskStatus")
         return when (i.status) {        //Uses Lambda
             TaskStatus.NO_STATUS -> {
 
@@ -91,12 +95,10 @@ class TaskHandler() {
         preReq: String,
         mainFrame: MainGUI
     ){
-        //TODO::: MAKE SURE TASK STATUS IS CALCULATED HERE IMMEDIATELY AFTER OBJECT CREATION
-        println("TaskHandler.createTask started")
 
-        //var estStartDate = calculateEstStartDate()
-        //var estStartDate : Calendar = Calenda
-        val preReqList = getPreReq(preReq)
+        println("TaskHandler.createTask -> started")
+
+        val preReqList = getPreReq(preReq)      //gets the pre-req tasks as an ArrayList of Tasks
         tasks.add(Task(taskName, estDays, teamAssigned, taskDescription, preReqList))
         calculateTaskStatus(tasks.last())
         println("Task created -> \n$tasks")
@@ -113,12 +115,14 @@ class TaskHandler() {
     }
 
     fun deleteTask(selectedTaskIndex: Int, selectedTaskName: String, mainFrame: MainGUI) {
-
+        println("TaskHandler.deleteTask -> started")
 
         tasks.removeAt(selectedTaskIndex)
         removeTaskFromPreReq(selectedTaskName)
         mainFrame.updateTaskPanels()
         Main.projectHandler.saveProjects()
+
+        println("TaskHAndler.deleteTask -> delete end")
     }
 
     fun completeTask(taskIndex: Int, mainFrame: MainGUI){
@@ -131,7 +135,7 @@ class TaskHandler() {
     }
 
     private fun removeTaskFromPreReq(selectedTaskName: String) {
-        //TODO("Not yet implemented")
+        //TODO("CALCULATE TASK STATUS MAY MOVE INTO LOOP")
         println("TaskHandler.deleteTask.removeFromPreReq -> removing deleted task from pre-req's")
         for (i in tasks){
             for (j in i.preReqTasks){
@@ -187,6 +191,7 @@ class TaskHandler() {
     }
 
     private fun getPreReq(preReq: String): ArrayList<Task> {
+        println("taskHandler.getPreReq -> getting pre-req tasks")
         val returnList = ArrayList<Task>()
         return if (preReq.isEmpty()) {
             returnList

@@ -43,11 +43,12 @@ public class CompleteTaskForm extends CommonUIMethods{
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
-        System.out.println("CancelTaskForm.cancelButtonPressed");
+        System.out.println("CompleteTaskForm.cancelButtonPressed");
         onExit(mainFrame);
     }
 
     private void completeButtonPressed(MainGUI mainFrame) {
+        System.out.println("CompleteTaskForm.completeButtonPressed");
         String selectedTask = taskCombo.getSelectedItem().toString();
         Task foundTask = Main.taskHandler.findTask(selectedTask);
         int taskIndex = Main.taskHandler.getTasks().indexOf(foundTask);
@@ -55,6 +56,7 @@ public class CompleteTaskForm extends CommonUIMethods{
     }
 
     private void populateComboBox() {
+        System.out.println("CompleteTaskForm.populateComboBox -> populating");
         for (int i=0; i<Main.taskHandler.getTasks().size();i++) {
             taskCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());
         }

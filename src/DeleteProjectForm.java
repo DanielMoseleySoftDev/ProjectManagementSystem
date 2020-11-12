@@ -47,8 +47,10 @@ public class DeleteProjectForm extends CommonUIMethods{
     }
 
     private void deleteButtonPressed(MainGUI mainFrame) {
+        System.out.println("DeleteProjectForm.deleteButtonPressed");
     }
     private void populateComboBox() {
+        System.out.println("DeleteProjectForm.populateComboBox -> populating");
         for (int i=0; i<Main.projectHandler.getProjects().size();i++) {
             projectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
         }
