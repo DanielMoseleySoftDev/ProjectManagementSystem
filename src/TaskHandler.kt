@@ -125,13 +125,24 @@ class TaskHandler() {
         println("TaskHAndler.deleteTask -> delete end")
     }
 
-    fun completeTask(taskIndex: Int, mainFrame: MainGUI){
+    fun completeTask(selectedTask: String, mainFrame: MainGUI){
 
-        tasks[taskIndex].status = TaskStatus.COMPLETE
-        println(tasks[taskIndex].status)//checking if it works
+        val foundTask = findTask(selectedTask)
+        //val taskIndex = tasks.indexOf(foundTask)
+
+
+        foundTask.status = TaskStatus.COMPLETE
+        println(foundTask.status)//checking if it works
+        //println(tasks[taskIndex].status)//checking if it works
+
+        println("attempt at completing the task")
+        println("found task Status -> ${foundTask.status}")
+        println("current project tasks -> "+Main.projectHandler.currentProject.Tasks)
+        removeTaskFromPreReq(selectedTask)
+
+        Main.projectHandler.saveProjects()
 
         mainFrame.updateTaskPanels()
-        Main.projectHandler.saveProjects()
     }
 
     private fun removeTaskFromPreReq(selectedTaskName: String) {

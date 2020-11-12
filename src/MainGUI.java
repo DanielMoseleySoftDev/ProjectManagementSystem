@@ -216,11 +216,8 @@ public class MainGUI extends JFrame{
         //todo : Need to add validation that a task has been selected.
         //  checkIfTaskSelected()
         // if selected != null then ... else...
-
-        System.out.println("delete task button pressed");
-        CompleteTaskForm popout = new CompleteTaskForm(this);
         System.out.println("complete task button pressed");
-
+        CompleteTaskForm popout = new CompleteTaskForm(this);
 
     }
 

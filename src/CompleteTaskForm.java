@@ -30,13 +30,13 @@ public class CompleteTaskForm extends CommonUIMethods{
         //---------------Action Listeners----------------------------
         cancelButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { completeButtonPressed(mainFrame);
+            public void actionPerformed(ActionEvent e) { cancelButtonPressed(mainFrame);
 
             }
         });
         completeButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { cancelButtonPressed(mainFrame);
+            public void actionPerformed(ActionEvent e) { completeButtonPressed(mainFrame);
 
             }
         });
@@ -50,15 +50,16 @@ public class CompleteTaskForm extends CommonUIMethods{
     private void completeButtonPressed(MainGUI mainFrame) {
         System.out.println("CompleteTaskForm.completeButtonPressed");
         String selectedTask = taskCombo.getSelectedItem().toString();
-        Task foundTask = Main.taskHandler.findTask(selectedTask);
-        int taskIndex = Main.taskHandler.getTasks().indexOf(foundTask);
-        Main.taskHandler.completeTask(taskIndex, mainFrame);
+
+        Main.taskHandler.completeTask(selectedTask, mainFrame);
     }
 
     private void populateComboBox() {
         System.out.println("CompleteTaskForm.populateComboBox -> populating");
         for (int i=0; i<Main.taskHandler.getTasks().size();i++) {
-            taskCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());
+            if(Main.taskHandler.getTasks().get(i).getStatus()==TaskStatus.ACTIVE) {
+                taskCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());
+            }
         }
     }
 }
