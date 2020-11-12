@@ -200,7 +200,9 @@ public class MainGUI extends JFrame{
     }
     
     private void deleteProjectButtonPressed() {
-        //to do
+        System.out.println("delete project button pressed");
+        DeleteProjectForm popout = new DeleteProjectForm(this);
+        this.setEnabled(false);
         System.out.println("delete project button pressed");
     }
 

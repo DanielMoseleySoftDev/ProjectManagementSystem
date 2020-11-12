@@ -121,8 +121,9 @@ class TaskHandler() {
         Main.projectHandler.saveProjects()
     }
 
-    fun completeTask(selectedTaskIndex: Int, mainFrame: MainGUI){
+    fun completeTask(taskIndex: Int, mainFrame: MainGUI){
 
+        tasks[taskIndex].status = TaskStatus.COMPLETE
 
 
         mainFrame.updateTaskPanels()
@@ -168,6 +169,7 @@ class TaskHandler() {
                 }
                 else if(i.status == TaskStatus.COMPLETE){
                     task.status = TaskStatus.ACTIVE
+
                     println("TaskHandler.calculateTaskStatus -> Current Status=ACTIVE")
                 }
                 else{
