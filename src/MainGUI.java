@@ -16,7 +16,6 @@ public class MainGUI extends JFrame{
     private JButton addTaskButton;
     private JButton deleteTaskButton;
     private JButton completeTaskButton;
-    private JButton editTaskButton;
     private JButton deleteProjectButton;
     private JButton CriticalButton;
     private JButton addTeamButton;
@@ -93,12 +92,6 @@ public class MainGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 completeTaskButtonPressed();
 
-            }
-        });
-        editTaskButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editTaskButtonPressed();
             }
         });
         deleteProjectButton.addActionListener(new ActionListener() {
@@ -203,13 +196,6 @@ public class MainGUI extends JFrame{
         DeleteProjectForm popout = new DeleteProjectForm(this);
         this.setEnabled(false);
         System.out.println("delete project button pressed");
-    }
-
-    private void editTaskButtonPressed() {
-        //to do
-        System.out.println("edit task button pressed");
-        EditTaskForm popout = new EditTaskForm(this);
-        this.setEnabled(false);
     }
 
     private void completeTaskButtonPressed() {
