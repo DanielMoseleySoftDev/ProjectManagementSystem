@@ -102,9 +102,12 @@ class TaskHandler() {
         tasks.add(Task(taskName, estDays, teamAssigned, taskDescription, preReqList))
         calculateTaskStatus(tasks.last())
         println("Task created -> \n$tasks")
+
         Main.projectHandler.saveProjects()
         mainFrame.updateTaskPanels()
     }
+
+
     fun findTask(taskName: String):Task{
         tasks.forEach { task ->
             if(taskName == task.taskName){

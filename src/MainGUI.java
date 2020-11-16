@@ -258,6 +258,7 @@ public class MainGUI extends JFrame{
 
     private void criticalButtonPressed() {
         System.out.println("CriticalButtonPressed");
+        Main.criticalPathHandler.flipChildParentNodes(Main.taskHandler.getTasks());
 
     }
 
