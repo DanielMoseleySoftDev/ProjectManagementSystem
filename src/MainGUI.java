@@ -32,6 +32,8 @@ public class MainGUI extends JFrame{
     private DefaultTableModel waitingModel;
     private DefaultTableModel completeModel;
 
+    private boolean loadedFlag = false;         //Flag for if a project is loaded. Activates/deactivates task options
+
 
     public MainGUI(){
 //        projectHandler = new ProjectHandler();
@@ -133,7 +135,22 @@ public class MainGUI extends JFrame{
     public void updateTaskPanels() {
         Main.taskHandler.updateTaskTables(activeModel,waitingModel,completeModel);
         System.out.println("Task Panels Updated");
+        toggleTaskOptionsEnabled();
     }
+
+    public void setLoadedFlag(Boolean flag){
+        loadedFlag = flag;
+    }
+
+    public void toggleTaskOptionsEnabled(){
+
+        addTaskButton.setEnabled(loadedFlag);
+        completeTaskButton.setEnabled(loadedFlag);
+        deleteTaskButton.setEnabled(loadedFlag);
+        System.out.println("MainGui.toggleTaskOptionsEnabled -> Task Options Enabled = "+loadedFlag);
+
+    }
+
 
 
     private void createTaskTable(String type) {
@@ -169,6 +186,7 @@ public class MainGUI extends JFrame{
         }
 
     }
+
 
     //----------------BUTTON PRESSED METHODS--------------------------------
 

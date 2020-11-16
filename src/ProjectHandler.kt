@@ -25,11 +25,24 @@ class ProjectHandler() {
 
     }
 
-    fun deleteProject(projectIndex: Int){
-        projects.removeAt(projectIndex)
-        saveProjects()
-        currentProject = Project("No Project Selected",projectStartDate = Date(),projectDescription = "No project selected")
-        Main.taskHandler.tasks.clear()
+    fun deleteProject(projectIndex: Int) : Boolean{
+        //projects.removeAt(projectIndex)
+        //saveProjects()
+
+        return if(projects[projectIndex]==currentProject){
+            projects.removeAt(projectIndex)
+            saveProjects()
+            currentProject = Project("No Project Selected",projectStartDate = Date(),projectDescription = "No project selected")
+            Main.taskHandler.tasks.clear()
+            false
+        }else{
+            projects.removeAt(projectIndex)
+            saveProjects()
+            currentProject.projectName != "No Project Selected"
+
+        }
+        //currentProject = Project("No Project Selected",projectStartDate = Date(),projectDescription = "No project selected")
+        //Main.taskHandler.tasks.clear()
     }
     fun findProject(projectName : String) : Project{
         projects.forEach { project ->
