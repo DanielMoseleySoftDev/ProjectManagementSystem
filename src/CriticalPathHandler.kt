@@ -30,7 +30,7 @@ class CriticalPathHandler {
     }
 
     private fun toStringArray(returnJobs : Array<Job>) {
-        println("Critical Tasks -> ")
+        println("Critical Tasks -> why we printing everything?")
 
 
         for (job in returnJobs){
