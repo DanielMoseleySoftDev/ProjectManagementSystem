@@ -1,15 +1,13 @@
 class CriticalPathKotlin {
-    var allTasks = HashSet<Task>()
 
-}
+    companion object{
+        fun calculateCriticalPath(jobs : HashSet<Job>){
+            println("CriticalPathKotlin.calculateCriticalPath -> Calculations Started")
 
-class KotlinTask(val criticalCost: Int?) {
-    val cost : Int = 0;
-    val name : String = "";
-
-    var dependencies = HashSet<Task>()
-
-    fun createKotlinTask(name : String, cost: Int, dependencies : ArrayList<String> ) {
+        }
 
     }
+
+
+
 }

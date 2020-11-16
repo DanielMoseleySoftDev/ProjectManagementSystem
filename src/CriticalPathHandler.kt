@@ -3,6 +3,24 @@ class CriticalPathHandler {
     var jobsList = ArrayList<Job>()
     var taskList = ArrayList<Task>()
 
+    fun calcCriticalPath(isKotlin : Boolean){
+
+        flipChildParentNodes(Main.taskHandler.tasks)
+        val jobSet = listToSet()
+
+        if (isKotlin){
+            //Kotlin
+            println("CriticalPathHandler.CalcCriticalPath -> Kotlin Algorithm")
+            CriticalPathKotlin.calculateCriticalPath(jobSet)
+
+        }else{
+            //Scala
+            println("CriticalPathHandler.CalcCriticalPath -> Scala Algorithm")
+        }
+
+
+    }
+
     fun flipChildParentNodes(tasks: ArrayList<Task>){
         println("hello")
 
@@ -36,7 +54,6 @@ class CriticalPathHandler {
             //println(jobsList[count].listOfParents)
         }
         println(jobsList[0].listOfChildren)
-
     }
 
     private fun createJobsList() {
@@ -47,6 +64,9 @@ class CriticalPathHandler {
 
 
         }
+    }
+    fun listToSet(): HashSet<Job> {
+        return HashSet(jobsList)
     }
 
     fun addJobs(tasks: ArrayList<Task>) {
