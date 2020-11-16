@@ -2,21 +2,45 @@ class CriticalPathHandler {
 
     var jobsList = ArrayList<Job>()
     var taskList = ArrayList<Task>()
+    var criticalTasks = ArrayList<String>()
 
-    fun calcCriticalPath(isKotlin : Boolean){
+    fun calcCriticalPath(isKotlin : Boolean) : ArrayList<String>{
 
         flipChildParentNodes(Main.taskHandler.tasks)
         val jobSet = listToSet()
+        var returnJobs: Array<Job>
 
         if (isKotlin){
             //Kotlin
             println("CriticalPathHandler.CalcCriticalPath -> Kotlin Algorithm")
-            CriticalPathKotlin.calculateCriticalPath(jobSet)
+            returnJobs =  CriticalPathKotlin.calculateCriticalPath(jobSet)
+
 
         }else{
             //Scala
             println("CriticalPathHandler.CalcCriticalPath -> Scala Algorithm")
+            val tempJob = Job("ERROR 6543",0)
+            returnJobs = arrayOf(tempJob)
         }
+
+        toStringArray(returnJobs)
+
+        return criticalTasks
+
+    }
+
+    private fun toStringArray(returnJobs : Array<Job>) {
+        println("Critical Tasks -> ")
+
+
+        for (job in returnJobs){
+            if (job.earlyStart == job.lateStart){
+                criticalTasks.add(job.jobName)
+                println(job.jobName)
+            }
+
+        }
+
 
 
     }
@@ -27,6 +51,8 @@ class CriticalPathHandler {
         taskList.addAll(tasks)
         //println(taskList)
         createJobsList()
+
+
         //println(jobsList)
         var count = 0
         for (i in taskList){
@@ -54,6 +80,27 @@ class CriticalPathHandler {
             //println(jobsList[count].listOfParents)
         }
         println(jobsList[0].listOfChildren)
+        addStartAndEnd()
+    }
+
+    private fun addStartAndEnd(){
+        var beginningJobs = ArrayList<Job>()
+        var finishingJobs = ArrayList<Job>()
+        for((count, task) in taskList.withIndex()){
+            if(task.preReqTasks.isEmpty()){
+                beginningJobs.add(jobsList[count])
+
+            }
+        }
+        jobsList.add(0, Job("START", 0, beginningJobs ))
+
+        for ((count, job) in jobsList.withIndex()) {
+            if(job.listOfChildren.isEmpty()){
+                finishingJobs.add(jobsList[count])
+            }
+        }
+
+        jobsList.add(jobsList.size, Job( "END",0, finishingJobs))
     }
 
     private fun createJobsList() {
@@ -65,13 +112,10 @@ class CriticalPathHandler {
 
         }
     }
-    fun listToSet(): HashSet<Job> {
+
+    private fun listToSet(): HashSet<Job> {
         return HashSet(jobsList)
     }
 
-    fun addJobs(tasks: ArrayList<Task>) {
-        for (task in tasks) {
 
-        }
-    }
 }
