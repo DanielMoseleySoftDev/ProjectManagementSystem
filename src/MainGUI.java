@@ -136,6 +136,7 @@ public class MainGUI extends JFrame{
             Main.projectHandler.calculateCriticalPath(true);
 
         }
+
         expFinTxt.setText(Main.projectHandler.calculateEndDate());
 
         Main.taskHandler.updateTaskTables(activeModel,waitingModel,completeModel);

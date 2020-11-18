@@ -18,7 +18,9 @@ class CriticalPathHandler {
         flipChildParentNodes(Main.taskHandler.tasks)
         val jobSet = listToSet()
         var returnJobs: Array<Job>
-
+        if (jobsList.isEmpty()){
+            return criticalTasks
+        }
         if (isKotlin){
             //Kotlin
             println("CriticalPathHandler.CalcCriticalPath -> Kotlin Algorithm")
@@ -34,7 +36,6 @@ class CriticalPathHandler {
 
         toStringArray(returnJobs)
         criticalTasks.add(criticalInfo)
-
         return criticalTasks
 
     }
@@ -72,7 +73,9 @@ class CriticalPathHandler {
         taskList.addAll(incompleteTasks)
         //println(taskList)
         createJobsList()
-
+        if(jobsList.isEmpty()){
+            return
+        }
 
         //println(jobsList)
         var count = 0

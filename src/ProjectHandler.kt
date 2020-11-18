@@ -32,11 +32,13 @@ class ProjectHandler() {
 
             }catch (ex : Exception){
                 println("ProjectHandler.calculateCriticalPath -> Exception: Unable to cast duration")
+                projectDuration = 0
             }
             Main.taskHandler.setCriticalInfo(criticalInformation)
 
         }else{
             println("ProjectHandler.calculateCriticalPath -> No tasks to calculate")
+            projectDuration = 0
         }
 
     }
