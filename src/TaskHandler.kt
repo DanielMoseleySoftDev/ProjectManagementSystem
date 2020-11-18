@@ -6,10 +6,16 @@ import kotlin.collections.ArrayList
 class TaskHandler() {
 
     var tasks = ArrayList<Task>()
-    var criticalInfo = arrayListOf<ArrayList<String>>()
+    var critInfo = arrayListOf<ArrayList<String>>()
 
     init{
 
+    }
+
+    fun setCriticalInfo(critInfo:ArrayList<ArrayList<String>>){
+
+        this.critInfo = critInfo
+        println("TaskHandler.setCriticalInfo -> 2D array of info:\n ${this.critInfo}")
     }
 
     fun updateTaskTables(
@@ -23,24 +29,24 @@ class TaskHandler() {
         waitingTable.setNumRows(0)
         completeTable.setNumRows(0)
 
+
+
         println("TaskHandler.updateTaskTables -> adding tasks to rows")
         if(tasks.isNotEmpty()){
             for(i in tasks){
 
                 val checkResult = checkTaskStatus(i)
                 if(checkResult == "ACTIVE"){
-                    activeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, "NA", "NA", "NA"))
+                    activeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, i.estDays, "NA", "NA"))
                 }else if(checkResult == "WAITING"){
                     waitingTable.addRow(
                         arrayOf<Any>(
-                            i.taskName, i.teamAssigned.teamName, i.estDays, "NA", getPreReqToString(
-                                i
-                            )
+                            i.taskName, i.teamAssigned.teamName, i.estDays, "NA", getPreReqToString(i),"NA"
                         )
                     )
 
                 }else if(checkResult == "COMPLETE"){
-                    completeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, "NA", "NA", "NA"))
+                    completeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, i.estDays))
                 }
 
             }
@@ -67,18 +73,18 @@ class TaskHandler() {
     private fun checkTaskStatus(i: Task): String {
         println("TaskHandler.checkTaskStatus")
         return when (i.status) {        //Uses Lambda
-            TaskStatus.NO_STATUS -> {
+            Status.NO_STATUS -> {
 
                 calculateTaskStatus(i)
                 checkTaskStatus(i)      //uses recursion as the status should have been calculated
             }
-            TaskStatus.ACTIVE -> {
+            Status.ACTIVE -> {
                 "ACTIVE"
             }
-            TaskStatus.WAITING -> {
+            Status.WAITING -> {
                 "WAITING"
             }
-            TaskStatus.COMPLETE -> {
+            Status.COMPLETE -> {
                 "COMPLETE"
             }
             else -> {
@@ -135,7 +141,7 @@ class TaskHandler() {
         //val taskIndex = tasks.indexOf(foundTask)
 
 
-        foundTask.status = TaskStatus.COMPLETE
+        foundTask.status = Status.COMPLETE
         println(foundTask.status)//checking if it works
         //println(tasks[taskIndex].status)//checking if it works
 
@@ -181,13 +187,13 @@ class TaskHandler() {
 
         if(task.preReqTasks.isNotEmpty()){
             for (i in task.preReqTasks){
-                if (i.status == TaskStatus.WAITING || i.status == TaskStatus.ACTIVE){
-                    task.status = TaskStatus.WAITING
+                if (i.status == Status.WAITING || i.status == Status.ACTIVE){
+                    task.status = Status.WAITING
                     println("TaskHandler.calculateTaskStatus -> Status=WAITING")
                     break
                 }
-                else if(i.status == TaskStatus.COMPLETE){
-                    task.status = TaskStatus.ACTIVE
+                else if(i.status == Status.COMPLETE){
+                    task.status = Status.ACTIVE
 
                     println("TaskHandler.calculateTaskStatus -> Current Status=ACTIVE")
                 }
@@ -198,10 +204,10 @@ class TaskHandler() {
 
         }
         else{
-            if(task.status==TaskStatus.COMPLETE){
+            if(task.status==Status.COMPLETE){
                 println("TaskHandler.calculateTaskStatus -> Task is Complete")
             }else{
-                task.status = TaskStatus.ACTIVE
+                task.status = Status.ACTIVE
                 println("TaskHandler.calculateTaskStatus -> Status=ACTIVE")
             }
 

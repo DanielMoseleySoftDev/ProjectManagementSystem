@@ -23,6 +23,7 @@ class ProjectHandler() {
 
     fun calculateCriticalPath(isKotlin: Boolean){
         val criticalInformation = Main.criticalPathHandler.calcCriticalPath(true)
+        Main.taskHandler.setCriticalInfo(criticalInformation)
     }
 
 

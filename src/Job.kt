@@ -1,6 +1,6 @@
 import java.time.Duration
 
-class Job(val jobName: String, val duration: Int, var listOfChildren: ArrayList<Job> = ArrayList()) {
+class Job(val jobName: String, val duration: Int, val jobStatus: Status,var listOfChildren: ArrayList<Job> = ArrayList()) {
 
 
     var criticalDuration = 0
@@ -8,7 +8,7 @@ class Job(val jobName: String, val duration: Int, var listOfChildren: ArrayList<
     var earlyFinish = 0
     var lateStart = 0
     var lateFinish = 0
-    var criticalStatus = IsCritical.NO
+    //val jobStatus = Status.NO_STATUS
 
     fun setLatest(maxDuration: Int){
         lateStart = maxDuration - criticalDuration
@@ -18,7 +18,3 @@ class Job(val jobName: String, val duration: Int, var listOfChildren: ArrayList<
 
 }
 
-enum class IsCritical{
-
-    YES,NO
-}

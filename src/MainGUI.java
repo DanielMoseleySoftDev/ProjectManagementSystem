@@ -161,7 +161,7 @@ public class MainGUI extends JFrame{
         System.out.println("Creating Table...");
 
         if(type == "active") {                                                          //creating active task table
-            String[] columnNames = {"Task Name", "Team", "Due date", "Time Left", "Delay"};
+            String[] columnNames = {"Name", "Team", "Duration", "Slack", "Critical?"};
             activeTaskTable.setModel(new DefaultTableModel(null, columnNames));
 
             activeModel = (DefaultTableModel) activeTaskTable.getModel();
@@ -172,7 +172,7 @@ public class MainGUI extends JFrame{
         }else if(type == "waiting"){                                                    //Creating waiting task table
 
 
-            String[] columnNames = {"Task Name", "Team", "Est Time", "Est. Start", "Prerequisites"};
+            String[] columnNames = {"Name", "Team", "Est Time", "Est. Start", "Prerequisites","Critical?"};
             waitingTaskTable.setModel(new DefaultTableModel(null,columnNames));
             waitingModel = (DefaultTableModel) waitingTaskTable.getModel();
             System.out.println("...Waiting Table Created");
@@ -180,7 +180,7 @@ public class MainGUI extends JFrame{
 
         }else if(type == "completed"){
 
-            String[] columnNames = {"Task Name", "Team", "Due date", "Time spent"," Delay"};
+            String[] columnNames = {"Name", "Team", "Duration"};
             completedTaskTable.setModel(new DefaultTableModel(null, columnNames));
             completeModel = (DefaultTableModel) completedTaskTable.getModel();
             System.out.println("...Completed table created");

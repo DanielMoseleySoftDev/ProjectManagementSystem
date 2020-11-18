@@ -58,7 +58,7 @@ public class CompleteTaskForm extends CommonUIMethods{
     private void populateComboBox() {
         System.out.println("CompleteTaskForm.populateComboBox -> populating");
         for (int i=0; i<Main.taskHandler.getTasks().size();i++) {
-            if(Main.taskHandler.getTasks().get(i).getStatus()==TaskStatus.ACTIVE) {
+            if(Main.taskHandler.getTasks().get(i).getStatus()==Status.ACTIVE) {
                 taskCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());
             }
         }

@@ -12,7 +12,7 @@ class CriticalPathHandler {
         jobsList.clear()
         taskList.clear()
         criticalInfo.clear()
-        criticalTasks.forEach { arrayList -> arrayList.clear() }
+        criticalTasks = arrayListOf<ArrayList<String>>()
 
 
         flipChildParentNodes(Main.taskHandler.tasks)
@@ -28,7 +28,7 @@ class CriticalPathHandler {
         }else{
             //Scala
             println("CriticalPathHandler.CalcCriticalPath -> Scala Algorithm")
-            val tempJob = Job("ERROR 6543",0)
+            val tempJob = Job("ERROR 6543",0,Status.NO_STATUS)
             returnJobs = arrayOf(tempJob)
         }
 
@@ -44,7 +44,7 @@ class CriticalPathHandler {
 
 
         for (job in returnJobs){
-            if (job.earlyStart == job.lateStart){
+            if(job.jobStatus != Status.COMPLETE){
                 var jobInfo = ArrayList<String>()
                 jobInfo.add(job.jobName)
                 val slack = job.lateFinish-job.earlyFinish
@@ -54,7 +54,6 @@ class CriticalPathHandler {
 
                 println(job.jobName)
             }
-
         }
 
 
@@ -108,8 +107,8 @@ class CriticalPathHandler {
 
             }
         }
-        jobsList.add(0, Job("START", 0, beginningJobs ))
-        jobsList.add(jobsList.size, Job( "END",0))
+        jobsList.add(0, Job("START", 0,Status.COMPLETE, beginningJobs))
+        jobsList.add(jobsList.size, Job( "END",0,Status.COMPLETE))
         for ((count, job) in jobsList.withIndex()) {
             if(job.listOfChildren.isEmpty() && job.jobName!="END"){
                 job.listOfChildren.add(jobsList.last())
@@ -124,7 +123,7 @@ class CriticalPathHandler {
         //TODO("Not yet implemented")
 
         for (task in taskList){
-           jobsList.add(Job(task.taskName,task.estDays))
+           jobsList.add(Job(task.taskName,task.estDays, task.status))
 
 
         }
