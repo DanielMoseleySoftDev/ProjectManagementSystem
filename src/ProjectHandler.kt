@@ -22,8 +22,13 @@ class ProjectHandler() {
     }
 
     fun calculateCriticalPath(isKotlin: Boolean){
-        val criticalInformation = Main.criticalPathHandler.calcCriticalPath(true)
-        Main.taskHandler.setCriticalInfo(criticalInformation)
+        if(Main.taskHandler.tasks.isNotEmpty()){
+            val criticalInformation = Main.criticalPathHandler.calcCriticalPath(true)
+            Main.taskHandler.setCriticalInfo(criticalInformation)
+        }else{
+            println("ProjectHandler.calculateCriticalPath -> No tasks to calculate")
+        }
+
     }
 
 
@@ -73,9 +78,15 @@ class ProjectHandler() {
     }
 
     fun loadProjects(){
-        projects = p.loadFromFile()
-        println(projects)
-        println("Project1 task: " + projects[0].Tasks + "\n")
+        try {
+            projects = p.loadFromFile()
+            println(projects)
+            println("-------------------------\n")
+        }catch (iob : IndexOutOfBoundsException ){
+            println("Projects file was empty on load")
+            println("-------------------------\n")
+        }
+
 
     }
 

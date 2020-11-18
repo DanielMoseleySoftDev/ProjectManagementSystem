@@ -68,6 +68,7 @@ class CriticalPathKotlin {
             // create a priority list
             Arrays.sort(ret) { job1, job2 -> job1.jobName.compareTo(job2.jobName) }
             println("Max Duration -> $maxDuration")
+            Main.criticalPathHandler.criticalInfo.add("Remaining critical duration:")
             Main.criticalPathHandler.criticalInfo.add(maxDuration.toString())
 
             return ret

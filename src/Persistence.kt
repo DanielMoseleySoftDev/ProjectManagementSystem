@@ -53,7 +53,7 @@ class Persistence {
             println("Projects Loaded into memory")
 
         }catch (ioe : IOException){
-            println("Error: Could not load from file:\n $projectFile")
+            println("Error: Could not load from file:\n $projectFile \n Possibly no projects")
             return nullList
         }catch (c: ClassNotFoundException){
             println("Error: Class not found to cast")

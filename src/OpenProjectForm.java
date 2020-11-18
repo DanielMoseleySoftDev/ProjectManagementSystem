@@ -62,11 +62,18 @@ public class OpenProjectForm extends CommonUIMethods{
         //                      - Calls function in the main gui to update its loaded project
 
         System.out.println("OpenProjectForm.openButtonPressed");
-        String selected = projectSelectCombo.getSelectedItem().toString();
-        Main.projectHandler.selectProject(selected);
-        mainFrame.setLoadedFlag(true);
-        mainFrame.updateLoadedProject();
-        onExit(mainFrame);
+        if(projectSelectCombo.getItemCount()!=0){
+            String selected = projectSelectCombo.getSelectedItem().toString();
+            Main.projectHandler.selectProject(selected);
+            mainFrame.setLoadedFlag(true);
+            mainFrame.updateLoadedProject();
+            onExit(mainFrame);
+        }else{
+            System.out.println("OpenProjectForm.openButtonPressed -> No Projects Selected");
+            JOptionPane.showMessageDialog(this,"No Projects.\nPlease create project first","Error: No Projects",JOptionPane.ERROR_MESSAGE);
+            onExit(mainFrame);
+        }
+
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
