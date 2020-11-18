@@ -8,7 +8,7 @@ public class MainGUI extends JFrame{
     private JPanel northPanel;
     private JPanel westPanel;
     private JTextField projectLoadedTxt;
-    private JTextField pEstFinTxt;
+    private JTextField expFinTxt;
     private JPanel centerPanel;
     private JButton saveButton;
     private JButton openProjectButton;
@@ -27,7 +27,6 @@ public class MainGUI extends JFrame{
     private JTable waitingTaskTable;
     private JTable completedTaskTable;
     private JComboBox scalaorkotlin;
-    private JProgressBar progressBar1;
     private DefaultTableModel activeModel;
     private DefaultTableModel waitingModel;
     private DefaultTableModel completeModel;
@@ -125,16 +124,18 @@ public class MainGUI extends JFrame{
 
 
     public void updateLoadedProject(){
-        //todo this method needs to be updated so that all project loaded stuff goes through here
         //update the loaded project of the system
         projectLoadedTxt.setText(Main.projectHandler.getCurrentProject().getProjectName());
+        //expFinTxt.setText(Main.projectHandler.getCurrentProject().getProjectEndDate());
         System.out.println("MainGUI.updateLoadedProject -> Updated loadedProjectTxt");
         updateTaskPanels();
     }
 
+
     public void updateTaskPanels() {
         if(loadedFlag){
             Main.projectHandler.calculateCriticalPath(true);
+
         }
         Main.taskHandler.updateTaskTables(activeModel,waitingModel,completeModel);
         System.out.println("Task Panels Updated");

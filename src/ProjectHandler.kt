@@ -1,4 +1,5 @@
 import java.util.*
+
 import kotlin.collections.ArrayList
 import kotlin.collections.forEach
 import kotlin.collections.last
@@ -25,6 +26,7 @@ class ProjectHandler() {
         if(Main.taskHandler.tasks.isNotEmpty()){
             val criticalInformation = Main.criticalPathHandler.calcCriticalPath(true)
             Main.taskHandler.setCriticalInfo(criticalInformation)
+
         }else{
             println("ProjectHandler.calculateCriticalPath -> No tasks to calculate")
         }
