@@ -61,9 +61,15 @@ class CriticalPathHandler {
     }
 
     fun flipChildParentNodes(tasks: ArrayList<Task>){
-        println("hello")
 
-        taskList.addAll(tasks)
+        //Makes the taskList and jobsList the same size by removing completed tasks
+        var incompleteTasks = ArrayList<Task>()
+        for (task in tasks) {
+            if(task.status != Status.COMPLETE) {
+                incompleteTasks.add(task)
+            }
+        }
+        taskList.addAll(incompleteTasks)
         //println(taskList)
         createJobsList()
 
@@ -121,12 +127,16 @@ class CriticalPathHandler {
 
     private fun createJobsList() {
         //TODO("Not yet implemented")
+        println("CriticalPathHandler.createJobList -> Adding Jobs")
 
         for (task in taskList){
-           jobsList.add(Job(task.taskName,task.estDays, task.status))
-
-
+            if(task.status != Status.COMPLETE){
+                jobsList.add(Job(task.taskName,task.estDays, task.status))
+            }else{
+                println("Task is Complete: ${task.taskName} -> Not added to job list")
+            }
         }
+        println("riticalPathHandler.createJobList -> All jobs added: \n $jobsList")
     }
 
     private fun listToSet(): HashSet<Job> {
