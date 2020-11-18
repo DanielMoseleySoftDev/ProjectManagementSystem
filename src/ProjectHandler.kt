@@ -1,3 +1,4 @@
+import java.lang.Exception
 import java.util.*
 
 import kotlin.collections.ArrayList
@@ -25,6 +26,12 @@ class ProjectHandler() {
     fun calculateCriticalPath(isKotlin: Boolean){
         if(Main.taskHandler.tasks.isNotEmpty()){
             val criticalInformation = Main.criticalPathHandler.calcCriticalPath(true)
+            try {
+                projectDuration = criticalInformation.last()[1].toInt()
+
+            }catch (ex : Exception){
+                println("ProjectHandler.calculateCriticalPath -> Exception: Unable to cast duration")
+            }
             Main.taskHandler.setCriticalInfo(criticalInformation)
 
         }else{
@@ -70,6 +77,7 @@ class ProjectHandler() {
         //currentProject = Project("No Project Selected",projectStartDate = Date(),projectDescription = "No project selected")
         //Main.taskHandler.tasks.clear()
     }
+
     fun findProject(projectName: String) : Project{
         projects.forEach { project ->
             if(projectName == project.projectName){

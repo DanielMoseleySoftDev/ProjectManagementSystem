@@ -33,20 +33,20 @@ class TaskHandler() {
 
         println("TaskHandler.updateTaskTables -> adding tasks to rows")
         if(tasks.isNotEmpty()){
-            for(i in tasks){
+            for(task in tasks){
 
-                val checkResult = checkTaskStatus(i)
+                val checkResult = checkTaskStatus(task)
                 if(checkResult == "ACTIVE"){
-                    activeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, i.estDays, "NA", "NA"))
+                    activeTable.addRow(arrayOf<Any>(task.taskName, task.teamAssigned.teamName, task.estDays, getSlack(task.taskName), isCritical(task.taskName)))
                 }else if(checkResult == "WAITING"){
                     waitingTable.addRow(
                         arrayOf<Any>(
-                            i.taskName, i.teamAssigned.teamName, i.estDays, "NA", getPreReqToString(i),"NA"
+                            task.taskName, task.teamAssigned.teamName, task.estDays, "NA", getPreReqToString(task),"NA"
                         )
                     )
 
                 }else if(checkResult == "COMPLETE"){
-                    completeTable.addRow(arrayOf<Any>(i.taskName, i.teamAssigned.teamName, i.estDays))
+                    completeTable.addRow(arrayOf<Any>(task.taskName, task.teamAssigned.teamName, task.estDays))
                 }
 
             }
@@ -55,6 +55,22 @@ class TaskHandler() {
 
         println("TaskHandler.updateTaskTables -> tables updated")
 
+    }
+
+    private fun isCritical(name : String): String {
+        for (job in critInfo){
+            if (name == job[0]){
+                return job[1]
+            }
+
+        }
+
+        return ""
+    }
+
+    private fun getSlack(name: String): String {
+
+        return ""
     }
 
     fun getPreReqToString(task: Task) : String{
