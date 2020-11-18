@@ -37,12 +37,14 @@ class TaskHandler() {
 
                 val checkResult = checkTaskStatus(task)
                 if(checkResult == "ACTIVE"){
-                    activeTable.addRow(arrayOf<Any>(task.taskName, task.teamAssigned.teamName, task.estDays, getSlack(task.taskName), isCritical(task.taskName)))
+                    activeTable.addRow(
+                        arrayOf<Any>(
+                            task.taskName, task.teamAssigned.teamName, task.estDays, getSlack(task.taskName), isCritical(task.taskName))
+                    )
                 }else if(checkResult == "WAITING"){
                     waitingTable.addRow(
                         arrayOf<Any>(
-                            task.taskName, task.teamAssigned.teamName, task.estDays, "NA", getPreReqToString(task),"NA"
-                        )
+                            task.taskName, task.teamAssigned.teamName, task.estDays, getPreReqToString(task), getSlack(task.taskName), isCritical(task.taskName))
                     )
 
                 }else if(checkResult == "COMPLETE"){
@@ -58,18 +60,23 @@ class TaskHandler() {
     }
 
     private fun isCritical(name : String): String {
+        var count = 0
         for (job in critInfo){
-            if (name == job[0]){
-                return job[1]
+            if (name == job[0] && job[1] =="0"){
+                return "\u2713"
             }
-
+            count++
         }
-
         return ""
     }
 
     private fun getSlack(name: String): String {
-
+        println(critInfo)
+        for (job in critInfo){
+            if (name == job[0]){
+                return job[1]
+            }
+        }
         return ""
     }
 

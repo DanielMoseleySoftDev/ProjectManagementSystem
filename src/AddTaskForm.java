@@ -74,15 +74,22 @@ public class AddTaskForm extends CommonUIMethods{
     private void addButtonPressed(MainGUI mainFrame) throws NumberFormatException {
         //todo implement addButtonPressed
         System.out.println("AddTaskForm.addButtonPressed");
-        taskName = taskNameTxt.getText();
-        estDays = Integer.parseInt(estDaysTxt.getText());
-        taskDescription = descriptionTxt.getText();
-        String teamName = teamCombo.getSelectedItem().toString();
-        team = Main.teamHandler.findTeam(teamName);
-        preReq = preReqTxt.getText();
-        //ArrayList<Task> preReqList = getPreReq();
-        Main.taskHandler.createTask(taskName,estDays,team,taskDescription,preReq,mainFrame);
-        onExit(mainFrame);
+        if(taskNameTxt.getText() != "Remaining critical duration:"){
+            taskName = taskNameTxt.getText();
+            estDays = Integer.parseInt(estDaysTxt.getText());
+            taskDescription = descriptionTxt.getText();
+            String teamName = teamCombo.getSelectedItem().toString();
+            team = Main.teamHandler.findTeam(teamName);
+            preReq = preReqTxt.getText();
+            //ArrayList<Task> preReqList = getPreReq();
+            Main.taskHandler.createTask(taskName,estDays,team,taskDescription,preReq,mainFrame);
+            onExit(mainFrame);
+        } else{
+            JOptionPane.showMessageDialog(this, "Illegal task name. \n " +
+                    "Please choose a different one","Warning" ,JOptionPane.WARNING_MESSAGE);
+            onExit(mainFrame);
+        }
+
         //Main.taskHandler.createTask(taskName, estDays, taskDescription);
         //TODO Team variable for task information?
     }

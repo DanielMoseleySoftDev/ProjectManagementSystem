@@ -9,7 +9,7 @@ class CriticalPathKotlin {
 
         fun calculateCriticalPath(jobs: HashSet<Job>) : Array<Job>{
             println("CriticalPathKotlin.calculateCriticalPath -> Calculations Started")
-
+            maxDuration = 0
             // tasks whose critical cost has been calculated
 
             // tasks whose critical cost has been calculated
