@@ -16,7 +16,7 @@ class CriticalPathKotlin {
             var completed: HashSet<Job> = HashSet()
             // tasks whose critical cost needs to be calculated
             // tasks whose critical cost needs to be calculated
-            var remaining = jobs
+            var remaining = HashSet(jobs)
 
             // Backflow algorithm
             // while there are tasks whose critical cost isn't calculated.
@@ -67,6 +67,8 @@ class CriticalPathKotlin {
             // create a priority list
             // create a priority list
             Arrays.sort(ret) { job1, job2 -> job1.jobName.compareTo(job2.jobName) }
+            println("Max Duration -> $maxDuration")
+            Main.criticalPathHandler.criticalInfo.add(maxDuration.toString())
 
             return ret
 

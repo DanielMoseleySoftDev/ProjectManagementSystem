@@ -133,9 +133,13 @@ public class MainGUI extends JFrame{
     }
 
     public void updateTaskPanels() {
+        if(loadedFlag){
+            Main.projectHandler.calculateCriticalPath(true);
+        }
         Main.taskHandler.updateTaskTables(activeModel,waitingModel,completeModel);
         System.out.println("Task Panels Updated");
         toggleTaskOptionsEnabled();
+
     }
 
     public void setLoadedFlag(Boolean flag){

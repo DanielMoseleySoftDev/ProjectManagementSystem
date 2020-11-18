@@ -6,6 +6,7 @@ import kotlin.collections.ArrayList
 class TaskHandler() {
 
     var tasks = ArrayList<Task>()
+    var criticalInfo = arrayListOf<ArrayList<String>>()
 
     init{
 

@@ -2,9 +2,18 @@ class CriticalPathHandler {
 
     var jobsList = ArrayList<Job>()
     var taskList = ArrayList<Task>()
-    var criticalTasks = ArrayList<String>()
+    //var criticalTasks = ArrayList<String>()
+    var criticalTasks = arrayListOf<ArrayList<String>>()
+    var criticalInfo = ArrayList<String>()
 
-    fun calcCriticalPath(isKotlin : Boolean) : ArrayList<String>{
+    fun calcCriticalPath(isKotlin : Boolean) : ArrayList<ArrayList<String>>{
+
+        //clear the lists from previous calculations
+        jobsList.clear()
+        taskList.clear()
+        criticalInfo.clear()
+        criticalTasks.forEach { arrayList -> arrayList.clear() }
+
 
         flipChildParentNodes(Main.taskHandler.tasks)
         val jobSet = listToSet()
@@ -24,6 +33,7 @@ class CriticalPathHandler {
         }
 
         toStringArray(returnJobs)
+        criticalTasks.add(criticalInfo)
 
         return criticalTasks
 
@@ -35,7 +45,13 @@ class CriticalPathHandler {
 
         for (job in returnJobs){
             if (job.earlyStart == job.lateStart){
-                criticalTasks.add(job.jobName)
+                var jobInfo = ArrayList<String>()
+                jobInfo.add(job.jobName)
+                val slack = job.lateFinish-job.earlyFinish
+                jobInfo.add(slack.toString())
+                //criticalTasks.add(job.jobName)
+                criticalTasks.add(jobInfo)
+
                 println(job.jobName)
             }
 
@@ -85,7 +101,7 @@ class CriticalPathHandler {
 
     private fun addStartAndEnd(){
         var beginningJobs = ArrayList<Job>()
-        var finishingJobs = ArrayList<Job>()
+       // var finishingJobs = ArrayList<Job>()
         for((count, task) in taskList.withIndex()){
             if(task.preReqTasks.isEmpty()){
                 beginningJobs.add(jobsList[count])
@@ -93,14 +109,15 @@ class CriticalPathHandler {
             }
         }
         jobsList.add(0, Job("START", 0, beginningJobs ))
-
+        jobsList.add(jobsList.size, Job( "END",0))
         for ((count, job) in jobsList.withIndex()) {
-            if(job.listOfChildren.isEmpty()){
-                finishingJobs.add(jobsList[count])
+            if(job.listOfChildren.isEmpty() && job.jobName!="END"){
+                job.listOfChildren.add(jobsList.last())
             }
         }
 
-        jobsList.add(jobsList.size, Job( "END",0, finishingJobs))
+        //jobsList.add(jobsList.size, Job( "END",0, finishingJobs))
+
     }
 
     private fun createJobsList() {
