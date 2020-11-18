@@ -1,4 +1,5 @@
 import java.lang.Exception
+import java.time.Duration
 import java.util.*
 
 import kotlin.collections.ArrayList
@@ -40,6 +41,9 @@ class ProjectHandler() {
 
     }
 
+    fun calculateEndDate(): String{
+        return projectDuration.toString()
+    }
 
     fun createProject(projectName: String, projectStartDate: Date, projectDescription: String) {
         println("ProjectHandler.createProject (Kt)- creating started")

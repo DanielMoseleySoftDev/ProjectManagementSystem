@@ -126,7 +126,6 @@ public class MainGUI extends JFrame{
     public void updateLoadedProject(){
         //update the loaded project of the system
         projectLoadedTxt.setText(Main.projectHandler.getCurrentProject().getProjectName());
-        //expFinTxt.setText(Main.projectHandler.getCurrentProject().getProjectEndDate());
         System.out.println("MainGUI.updateLoadedProject -> Updated loadedProjectTxt");
         updateTaskPanels();
     }
@@ -137,6 +136,8 @@ public class MainGUI extends JFrame{
             Main.projectHandler.calculateCriticalPath(true);
 
         }
+        expFinTxt.setText(Main.projectHandler.calculateEndDate());
+
         Main.taskHandler.updateTaskTables(activeModel,waitingModel,completeModel);
         System.out.println("Task Panels Updated");
         toggleTaskOptionsEnabled();
