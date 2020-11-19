@@ -1,3 +1,7 @@
-class CriticalPathScala {
+object CriticalPathScala {
+
+  def helloWorld(): Unit ={
+    println("Hello World")
+  }
 
 }

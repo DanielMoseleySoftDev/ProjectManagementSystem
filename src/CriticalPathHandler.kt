@@ -15,6 +15,7 @@ class CriticalPathHandler {
         criticalTasks = arrayListOf<ArrayList<String>>()
 
 
+
         flipChildParentNodes(Main.taskHandler.tasks)
         val jobSet = listToSet()
         var returnJobs: Array<Job>
@@ -22,15 +23,19 @@ class CriticalPathHandler {
             return criticalTasks
         }
         if (isKotlin){
+            CriticalPathScala.helloWorld()
             //Kotlin
             println("CriticalPathHandler.CalcCriticalPath -> Kotlin Algorithm")
             returnJobs =  CriticalPathKotlin.calculateCriticalPath(jobSet)
 
 
-        }else{
+        }else if(!isKotlin){    //Todo Get rid of this else if. Can just be else
             //Scala
             println("CriticalPathHandler.CalcCriticalPath -> Scala Algorithm")
             val tempJob = Job("ERROR 6543",0,Status.NO_STATUS)
+            returnJobs = arrayOf(tempJob)
+        }else{
+            val tempJob = Job("ERROR 50078",0,Status.NO_STATUS)
             returnJobs = arrayOf(tempJob)
         }
 
