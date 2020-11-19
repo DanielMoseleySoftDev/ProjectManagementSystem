@@ -2,7 +2,7 @@ import java.util
 
 class CriticalPathScala {
 
-  def helloWorld(jobs: util.HashSet[Job]): Array[Job] ={
+  def calculateCriticalPath(jobs: util.HashSet[Job]): Array[Job] ={
     println("SCALA TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     println(jobs)
 

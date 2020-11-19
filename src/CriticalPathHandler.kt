@@ -28,7 +28,7 @@ class CriticalPathHandler {
         }else if(!isKotlin){    //Todo Get rid of this else if. Can just be else
             //Scala
             println("CriticalPathHandler.CalcCriticalPath -> Scala Algorithm")
-            returnJobs = Main.scalaHandler.jobSetPasser(jobSet)
+            returnJobs = Main.scalaHandler.calculateCriticalPath(jobSet)
         }else{
             val tempJob = Job("ERROR 50078",0,Status.NO_STATUS)
             returnJobs = arrayOf(tempJob)
