@@ -14,26 +14,21 @@ class CriticalPathHandler {
         criticalInfo.clear()
         criticalTasks = arrayListOf<ArrayList<String>>()
 
-
-
         flipChildParentNodes(Main.taskHandler.tasks)
         val jobSet = listToSet()
         var returnJobs: Array<Job>
         if (jobsList.isEmpty()){
             return criticalTasks
         }
+
         if (isKotlin){
-            CriticalPathScala.helloWorld()
             //Kotlin
             println("CriticalPathHandler.CalcCriticalPath -> Kotlin Algorithm")
             returnJobs =  CriticalPathKotlin.calculateCriticalPath(jobSet)
-
-
         }else if(!isKotlin){    //Todo Get rid of this else if. Can just be else
             //Scala
             println("CriticalPathHandler.CalcCriticalPath -> Scala Algorithm")
-            val tempJob = Job("ERROR 6543",0,Status.NO_STATUS)
-            returnJobs = arrayOf(tempJob)
+            returnJobs = Main.scalaHandler.jobSetPasser(jobSet)
         }else{
             val tempJob = Job("ERROR 50078",0,Status.NO_STATUS)
             returnJobs = arrayOf(tempJob)
@@ -128,7 +123,6 @@ class CriticalPathHandler {
                 job.listOfChildren.add(jobsList.last())
             }
         }
-
         //jobsList.add(jobsList.size, Job( "END",0, finishingJobs))
 
     }
@@ -136,7 +130,6 @@ class CriticalPathHandler {
     private fun createJobsList() {
         //TODO("Not yet implemented")
         println("CriticalPathHandler.createJobList -> Adding Jobs")
-
         for (task in taskList){
             if(task.status != Status.COMPLETE){
                 jobsList.add(Job(task.taskName,task.estDays, task.status))
@@ -144,12 +137,10 @@ class CriticalPathHandler {
                 println("Task is Complete: ${task.taskName} -> Not added to job list")
             }
         }
-        println("riticalPathHandler.createJobList -> All jobs added: \n $jobsList")
+        println("CriticalPathHandler.createJobList -> All jobs added: \n $jobsList")
     }
 
     private fun listToSet(): HashSet<Job> {
         return HashSet(jobsList)
     }
-
-
 }

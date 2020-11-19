@@ -1,7 +1,16 @@
-object CriticalPathScala {
+import java.util
 
-  def helloWorld(): Unit ={
-    println("Hello World")
+class CriticalPathScala {
+
+  def helloWorld(jobs: util.HashSet[Job]): Array[Job] ={
+    println("SCALA TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    println(jobs)
+
+    val output = new Array[Job](2)
+
+
+
+    return output
   }
 
 }
