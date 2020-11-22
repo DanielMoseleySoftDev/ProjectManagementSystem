@@ -97,11 +97,8 @@ public class AddTaskForm extends CommonUIMethods{
         } else{
             JOptionPane.showMessageDialog(this, "Illegal task name. \n " +
                     "Please choose a different one","Warning" ,JOptionPane.WARNING_MESSAGE);
-            onExit(mainFrame);
+            stopFlag = false;
         }
-
-        //Main.taskHandler.createTask(taskName, estDays, taskDescription);
-        //TODO Team variable for task information?
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {

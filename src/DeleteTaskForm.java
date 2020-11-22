@@ -49,13 +49,19 @@ public class DeleteTaskForm extends CommonUIMethods{
     }
 
     private void deleteButtonPressed(MainGUI mainFrame) {
-        String selectedTask = taskCombo.getSelectedItem().toString();
-        Task foundTask = Main.taskHandler.findTask(selectedTask);
-        int taskIndex = Main.taskHandler.getTasks().indexOf(foundTask);
-        Main.taskHandler.deleteTask(taskIndex, selectedTask, mainFrame);
+        try{
+            String selectedTask = taskCombo.getSelectedItem().toString();
+            Task foundTask = Main.taskHandler.findTask(selectedTask);
+            int taskIndex = Main.taskHandler.getTasks().indexOf(foundTask);
+            Main.taskHandler.deleteTask(taskIndex, selectedTask, mainFrame);
+            System.out.println("DeleteTeamForm.deleteButtonPressed");
+            onExit(mainFrame);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Nothing to delete",
+                    "Warning" ,JOptionPane.WARNING_MESSAGE);
+            onExit(mainFrame);
+        }
 
-        System.out.println("DeleteTeamForm.deleteButtonPressed");
-        onExit(mainFrame);
     }
 
     private void populateComboBox() {

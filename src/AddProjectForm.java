@@ -25,6 +25,7 @@ public class AddProjectForm extends CommonUIMethods{
     private String projectName;
     private Date startDate;
     private String Description;
+    public boolean stopFlag = false;
 
     public AddProjectForm(MainGUI mainFrame){
 
@@ -72,18 +73,37 @@ public class AddProjectForm extends CommonUIMethods{
     private void addButtonPressed(MainGUI mainFrame) throws ParseException {
         //todo implement addButtonPressed
         System.out.println("AddProjectForm.addButtonPressed");
-
-
-
         String projectName = projectNameTxt.getText();
         String description = descriptionTxt.getText();
         Date startDate = dateFormat.parse(dateTxt.getText());
-        Main.projectHandler.createProject(projectName, startDate, description);
+
+        for (int i=0; i<Main.projectHandler.getProjects().size();i++){
+            if(projectName.equals(Main.projectHandler.getProjects().get(i).getProjectName())){
+                stopFlag = true;
+                break;
+            }
+        }
+
+
+        if(!stopFlag){
+            Main.projectHandler.createProject(projectName, startDate, description);
+            mainFrame.setLoadedFlag(true);
+            mainFrame.updateLoadedProject();
+            onExit(mainFrame);
+            mainFrame.setLoadedFlag(true);
+            mainFrame.updateLoadedProject();
+            onExit(mainFrame);
+        }else{
+            JOptionPane.showMessageDialog(this, "Project already exists \n " +
+                    "Please choose a different name","Warning" ,JOptionPane.WARNING_MESSAGE);
+            stopFlag = false;
+        }
+
+
+
         System.out.println("Added project to list of projects:\n"+Main.projectHandler.getProjects());
 
-        mainFrame.setLoadedFlag(true);
-        mainFrame.updateLoadedProject();
-        onExit(mainFrame);
+
 
 
 

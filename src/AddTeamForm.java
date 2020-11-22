@@ -13,9 +13,9 @@ public class AddTeamForm extends CommonUIMethods{
     private JPanel actionPanel;
     private JPanel inputPanel;
     private JScrollPane descriptionPanel;
-
     private String teamName;
     private String teamDescription;
+    public boolean stopFlag = false;
 
 
     public AddTeamForm(JFrame mainFrame){
@@ -51,14 +51,29 @@ public class AddTeamForm extends CommonUIMethods{
 
     //--------Methods---------------------------------------------
     private void addButtonPressed(JFrame mainFrame) {
-        //todo implement addButtonPressed
         System.out.println("AddTeamForm.addButtonPressed");
         teamName = nameTxt.getText();
         teamDescription = descriptionTxt.getText();
+        if(teamName.equals("N/A")){
+            stopFlag  = true;
+        }
+        for (int i=0; i<Main.teamHandler.getTeams().size();i++) {
+                if(teamName.equals(Main.teamHandler.getTeams().get(i).getTeamName())){
+                    stopFlag = true;
+                }
+            }
 
-        Main.teamHandler.createTeam(teamName, teamDescription);
-        System.out.println("Team created \n" + Main.teamHandler.getTeams());
-        onExit(mainFrame);
+        if(!stopFlag){
+            Main.teamHandler.createTeam(teamName, teamDescription);
+            System.out.println("Team created \n" + Main.teamHandler.getTeams());
+            onExit(mainFrame);
+        }else{
+            JOptionPane.showMessageDialog(this, "Team name exists \n " +
+                    "Please choose a different one","Warning" ,JOptionPane.WARNING_MESSAGE);
+            stopFlag = false;
+        }
+
+
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
