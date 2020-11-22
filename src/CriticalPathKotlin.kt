@@ -1,4 +1,3 @@
-import java.util.*
 import kotlin.collections.HashSet
 
 class CriticalPathKotlin {
@@ -10,41 +9,39 @@ class CriticalPathKotlin {
         fun calculateCriticalPath(jobs: HashSet<Job>) : Array<Job>{
             println("CriticalPathKotlin.calculateCriticalPath -> Calculations Started")
             maxDuration = 0
-            // tasks whose critical cost has been calculated
 
-            // tasks whose critical cost has been calculated
+            // jobs whose critical cost has been calculated
             var completed: HashSet<Job> = HashSet()
-            // tasks whose critical cost needs to be calculated
-            // tasks whose critical cost needs to be calculated
+
+            // jobs whose critical cost needs to be calculated
             var remaining = HashSet(jobs)
 
             // Backflow algorithm
             // while there are tasks whose critical cost isn't calculated.
-
-            // Backflow algorithm
-            // while there are tasks whose critical cost isn't calculated.
             while (!remaining.isEmpty()) {
+
                 var progress = false
 
                 // find a new task to calculate
-                val it: MutableIterator<Job> = remaining.iterator()
-                while (it.hasNext()) {
-                    val job: Job = it.next()
+                val iterator: MutableIterator<Job> = remaining.iterator()
+                while (iterator.hasNext()) {
+                    val job: Job = iterator.next()
                     if (completed.containsAll(job.listOfChildren)) {
-                        // all dependencies calculated, critical cost is max
-                        // dependency
-                        // critical cost, plus our cost
-                        var critical = 0
-                        for (j in job.listOfChildren) {
-                            if (j.criticalDuration > critical) {
-                                critical = j.criticalDuration
+
+                        // critical duration plus child critical duration
+                        var criticalDuration = 0
+                        for (child in job.listOfChildren) {
+                            if (child.criticalDuration > criticalDuration) {
+                                criticalDuration = child.criticalDuration
                             }
                         }
-                        job.criticalDuration = critical + job.duration
-                        // set task as calculated an remove
+                        job.criticalDuration = criticalDuration + job.duration
+
+                        // add job to completed and remove from remainin
                         completed.add(job)
-                        it.remove()
-                        // note we are making progress
+                        iterator.remove()
+
+                        //if this is set, we know there is no cycle
                         progress = true
                     }
                 }
@@ -53,71 +50,67 @@ class CriticalPathKotlin {
                 if (!progress) throw RuntimeException("Cyclic dependency, algorithm stopped!")
             }
 
-            // get the cost
-
-            // get the cost
+            // calculate the critical duration (total critical path value)
             calcMaxDuration(jobs)
-            val initialNodes: HashSet<Job> = initials(jobs)
-            calculateEarly(initialNodes)
 
-            // get the tasks
+            //get the starting jobs and set their early start and finish
+            val startingJobs: HashSet<Job> = findStartingJobs(jobs)
+            calcEarly(startingJobs)
 
-            // get the tasks
-            val ret: Array<Job> = completed.toTypedArray()
-            // create a priority list
-            // create a priority list
-            Arrays.sort(ret) { job1, job2 -> job1.jobName.compareTo(job2.jobName) }
-            println("Max Duration -> $maxDuration")
+            // Convert completed to an array
+            val completedArray: Array<Job> = completed.toTypedArray()
+
+            // Append the critical duration to the return array
+            println("CriticalPathKotlin.calculateCriticalPath.maxDuration -> $maxDuration")
             Main.criticalPathHandler.criticalInfo.add("Remaining critical duration:")
             Main.criticalPathHandler.criticalInfo.add(maxDuration.toString())
 
-            return ret
-
+            return completedArray
         }
 
         private fun calcMaxDuration(jobs: Set<Job>) {
+            // Set max to -1 so that the critical duration of a job is always bigger
             var max = -1
-            for (j in jobs) {
-                if (j.criticalDuration > max) max = j.criticalDuration
+            for (job in jobs) {
+                if (job.criticalDuration > max) max = job.criticalDuration
             }
             maxDuration = max
             println("Critical path length (Duration): $maxDuration")
-            for (j in jobs) {
-                j.setLatest(maxDuration)
+            for (job in jobs) {
+                job.setLatest(maxDuration)
             }
         }
 
-        private fun initials(jobs: Set<Job>): HashSet<Job> {
+        private fun findStartingJobs(jobs: Set<Job>): HashSet<Job> {
             val remaining: HashSet<Job> = HashSet<Job>(jobs)
-            for (j in jobs) {
-                for (tc in j.listOfChildren) {
-                    remaining.remove(tc)
+            for (job in jobs) {
+                for (child in job.listOfChildren) {
+                    remaining.remove(child)
                 }
             }
-            print("Initial nodes: ")
-            for (j in remaining) print(j.jobName + " ")
+            print("Starting jobs: ")
+            for (job in remaining) print(job.jobName + " ")
             print("\n\n")
             return remaining
         }
 
-        fun calculateEarly(initials: HashSet<Job>) {
-            for (initial in initials) {
-                initial.earlyStart = 0
-                initial.earlyFinish = initial.duration
-                setEarly(initial)
+        fun calcEarly(startingJobs: HashSet<Job>) {
+            for (job in startingJobs) {
+                job.earlyStart = 0
+                job.earlyFinish = job.duration
+                setEarly(job)
             }
         }
 
-        private fun setEarly(initial: Job) {
-            val completionTime = initial.earlyFinish
-            for (j in initial.listOfChildren) {
-                if (completionTime >= j.earlyStart) {
-                    j.earlyStart = completionTime
-                    j.earlyFinish = completionTime + j.duration
+        private fun setEarly(startingJob: Job) {
+            val completionTime = startingJob.earlyFinish
+            for (child in startingJob.listOfChildren) {
+                if (completionTime >= child.earlyStart) {
+                    child.earlyStart = completionTime
+                    child.earlyFinish = completionTime + child.duration
                 }
-                setEarly(j)
+                setEarly(child)
             }
-
         }
     }
 }
