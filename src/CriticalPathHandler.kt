@@ -25,6 +25,7 @@ class CriticalPathHandler {
             //Kotlin
             println("CriticalPathHandler.CalcCriticalPath -> Kotlin Algorithm")
             returnJobs =  CriticalPathKotlin.calculateCriticalPath(jobSet)
+            Main.scalaHandler.calculateCriticalPath(jobSet)
         }else if(!isKotlin){    //Todo Get rid of this else if. Can just be else
             //Scala
             println("CriticalPathHandler.CalcCriticalPath -> Scala Algorithm")

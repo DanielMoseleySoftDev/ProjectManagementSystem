@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class MainGUI extends JFrame{
     private JPanel mainPanel;
@@ -26,12 +28,13 @@ public class MainGUI extends JFrame{
     private JTable activeTaskTable;
     private JTable waitingTaskTable;
     private JTable completedTaskTable;
-    private JComboBox scalaorkotlin;
+    private JComboBox critPathSelectionCombo;
     private DefaultTableModel activeModel;
     private DefaultTableModel waitingModel;
     private DefaultTableModel completeModel;
 
     private boolean loadedFlag = false;         //Flag for if a project is loaded. Activates/deactivates task options
+    private boolean iskotlin = true;
 
 
     public MainGUI(){
@@ -52,8 +55,8 @@ public class MainGUI extends JFrame{
         createTaskTable("waiting");
         createTaskTable("completed");
         System.out.println("--------------------------\n");
-        scalaorkotlin.addItem("Kotlin");
-        scalaorkotlin.addItem("Scala");
+        critPathSelectionCombo.addItem("Kotlin");
+        critPathSelectionCombo.addItem("Scala");
 
 
 
@@ -120,6 +123,25 @@ public class MainGUI extends JFrame{
                 deleteTeamButtonPressed();
             }
         });
+        critPathSelectionCombo.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED){
+                    critPathAlgorithmChange();
+                }
+
+            }
+        });
+    }
+
+    private void critPathAlgorithmChange() {
+        if(critPathSelectionCombo.getSelectedItem().toString() == "Kotlin"){
+            iskotlin = true;
+            System.out.println("Critical Path Algorithm changed. True = Kotlin, False = Scala: "+iskotlin);
+        }else{
+            iskotlin = false;
+            System.out.println("Critical Path Algorithm changed. True = Kotlin, False = Scala: "+iskotlin);
+        }
     }
 
 
@@ -133,7 +155,7 @@ public class MainGUI extends JFrame{
 
     public void updateTaskPanels() {
         if(loadedFlag){
-            Main.projectHandler.calculateCriticalPath(true);
+            Main.projectHandler.calculateCriticalPath(iskotlin);
 
         }
 

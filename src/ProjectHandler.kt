@@ -26,7 +26,7 @@ class ProjectHandler() {
 
     fun calculateCriticalPath(isKotlin: Boolean){
         if(Main.taskHandler.tasks.isNotEmpty()){
-            val criticalInformation = Main.criticalPathHandler.calcCriticalPath(true)
+            val criticalInformation = Main.criticalPathHandler.calcCriticalPath(isKotlin)
             try {
                 projectDuration = criticalInformation.last()[1].toInt()
 
