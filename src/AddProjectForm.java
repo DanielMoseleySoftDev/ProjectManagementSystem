@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -20,6 +21,8 @@ public class AddProjectForm extends CommonUIMethods{
     private JButton addButton;
     private JTextArea descriptionTxt;
     private JScrollPane descriptionPanel;
+    private JLabel dateLbl;
+    private JLabel nameLbl;
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     private String projectName;
@@ -47,10 +50,13 @@ public class AddProjectForm extends CommonUIMethods{
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dateLbl.setForeground(Color.BLACK);
+                nameLbl.setForeground(Color.BLACK);
                 try {
                     addButtonPressed(mainFrame);
                 } catch (ParseException parseException) {
                     System.out.println("Add Project Form - Wrong Date Format");
+                    dateLbl.setForeground(Color.RED);
                 }
             }
         });
@@ -94,18 +100,10 @@ public class AddProjectForm extends CommonUIMethods{
             mainFrame.updateLoadedProject();
             onExit(mainFrame);
         }else{
+            nameLbl.setForeground(Color.RED);
             JOptionPane.showMessageDialog(this, "Project already exists \n " +
                     "Please choose a different name","Warning" ,JOptionPane.WARNING_MESSAGE);
             stopFlag = false;
         }
-
-
-
-        System.out.println("Added project to list of projects:\n"+Main.projectHandler.getProjects());
-
-
-
-
-
     }
 }

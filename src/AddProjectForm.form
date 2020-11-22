@@ -47,12 +47,12 @@
         <properties/>
         <border type="bevel-lowered"/>
         <children>
-          <component id="94ddc" class="javax.swing.JLabel">
+          <component id="94ddc" class="javax.swing.JLabel" binding="nameLbl">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Project Name:"/>
+              <text value="Project Name:*"/>
             </properties>
           </component>
           <component id="2e0df" class="javax.swing.JTextField" binding="projectNameTxt">
@@ -63,12 +63,12 @@
             </constraints>
             <properties/>
           </component>
-          <component id="10c4d" class="javax.swing.JLabel">
+          <component id="10c4d" class="javax.swing.JLabel" binding="dateLbl">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Start Date (DD/MM/YYYY):"/>
+              <text value="Start Date (DD/MM/YYYY):*"/>
             </properties>
           </component>
           <component id="8fbb8" class="javax.swing.JFormattedTextField" binding="dateTxt">
