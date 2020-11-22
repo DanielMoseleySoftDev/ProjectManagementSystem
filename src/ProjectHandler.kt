@@ -149,5 +149,13 @@ class ProjectHandler() {
         println("ProjectHandler.selectProject -> Main.taskHandler.tasks set to currentProjects tasks:\n" + Main.taskHandler.tasks)
 
     }
+
+    fun projectToString(projectName: String) : String{
+
+        val selectedProject = findProject(projectName)
+        return "Project Name: ${selectedProject.projectName} \n " +
+                "Start Date: ${selectedProject.projectStartDate} \n \n" +
+                "Description: ${selectedProject.projectDescription} \n "
+    }
 }
 

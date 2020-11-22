@@ -27,6 +27,8 @@ public class MainGUI extends JFrame{
     private JTable completedTaskTable;
     private JComboBox critPathSelectionCombo;
     private JTextField daysLeftTxt;
+    private JButton projectInfoButton;
+    private JButton taskInfoButton;
     private DefaultTableModel activeModel;
     private DefaultTableModel waitingModel;
     private DefaultTableModel completeModel;
@@ -119,7 +121,14 @@ public class MainGUI extends JFrame{
 
             }
         });
+        projectInfoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                projectInfoButtonPressed();
+            }
+        });
     }
+
 
     //-----------------GUI METHODS----------------------------------------
     private void critPathAlgorithmChange() {
@@ -164,6 +173,7 @@ public class MainGUI extends JFrame{
         addTaskButton.setEnabled(loadedFlag);
         completeTaskButton.setEnabled(loadedFlag);
         deleteTaskButton.setEnabled(loadedFlag);
+        taskInfoButton.setEnabled((loadedFlag));
         System.out.println("MainGui.toggleTaskOptionsEnabled -> Task Options Enabled = "+loadedFlag);
 
     }
@@ -263,6 +273,13 @@ public class MainGUI extends JFrame{
         this.setEnabled(false);
 
     }
+
+    private void projectInfoButtonPressed() {
+        System.out.println("projectInfoButtonPressed");
+        ProjectInfoForm popout = new ProjectInfoForm(this);
+        this.setEnabled(false);
+    }
+
 
     //-----------------------------------------------------------------------
 
