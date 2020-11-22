@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="TaskInfoForm">
+  <grid id="27dc6" binding="taskInfoFormpanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <maximumSize width="500" height="400"/>
+      <minimumSize width="500" height="400"/>
+      <preferredSize width="500" height="400"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="32912" binding="northPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="bevel-lowered"/>
+        <children>
+          <component id="ad988" class="javax.swing.JComboBox" binding="taskCombo">
+            <constraints border-constraint="South"/>
+            <properties/>
+          </component>
+        </children>
+      </grid>
+      <grid id="6b00" binding="centerPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="bevel-lowered"/>
+        <children>
+          <component id="dbb25" class="javax.swing.JTextArea" binding="descriptionTxt">
+            <constraints border-constraint="Center"/>
+            <properties/>
+          </component>
+          <vspacer id="e8526">
+            <constraints border-constraint="North"/>
+          </vspacer>
+          <vspacer id="527aa">
+            <constraints border-constraint="South"/>
+          </vspacer>
+          <hspacer id="1d4a8">
+            <constraints border-constraint="East"/>
+          </hspacer>
+          <hspacer id="fdabb">
+            <constraints border-constraint="West"/>
+          </hspacer>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

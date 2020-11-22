@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.swing.table.DefaultTableModel
 import kotlin.collections.ArrayList
@@ -178,6 +179,21 @@ class TaskHandler() {
         mainFrame.updateTaskPanels()
     }
 
+    fun taskToString(taskName: String): String{
+        val selectedTask = findTask(taskName)
+        var preReq =""
+        for(t in selectedTask.preReqTasks){
+            preReq += t.taskName + ", "
+        }
+
+        return "\nTask Name: ${selectedTask.taskName}\n" +
+                "Team Assigned: ${selectedTask.teamAssigned.teamName}\n" +
+                "Estimated Time: ${selectedTask.estDays} days\n" +
+                "Pre-Requisites: ${preReq}\n" +
+                "\nDescription: ${selectedTask.taskDescription}"
+
+    }
+
     private fun removeTaskFromPreReq(selectedTaskName: String) {
         //TODO("CALCULATE TASK STATUS MAY MOVE INTO LOOP")
         println("TaskHandler.deleteTask.removeFromPreReq -> removing deleted task from pre-req's")
@@ -261,4 +277,6 @@ class TaskHandler() {
             returnList
         }
     }
+
+
 }

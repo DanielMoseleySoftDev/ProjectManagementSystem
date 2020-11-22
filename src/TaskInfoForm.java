@@ -4,20 +4,21 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class ProjectInfoForm extends CommonUIMethods{
-    private JPanel projectInfoPanel;
-    private JPanel centerPanel;
-    private JComboBox projectCombo;
+public class TaskInfoForm extends CommonUIMethods{
+    private JPanel taskInfoFormpanel;
     private JPanel northPanel;
-    private JTextArea projectInfoTxt;
+    private JPanel centerPanel;
+    private JComboBox taskCombo;
+    private JTextArea descriptionTxt;
 
-    public ProjectInfoForm(MainGUI mainFrame){
 
-        setContentPane(projectInfoPanel);
+    public TaskInfoForm(MainGUI mainFrame){
+
+        setContentPane(taskInfoFormpanel);
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Project Info - Project Management System");
+        setTitle("Task Info - Project Management System");
         populateComboBox();
         selectionChange();
         setVisible(true);
@@ -27,28 +28,26 @@ public class ProjectInfoForm extends CommonUIMethods{
                 onExit(mainFrame);
             }
         }); //unfreezes main gui when pop out is closed
-        projectCombo.addItemListener(new ItemListener() {
+
+        taskCombo.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
                     selectionChange();
                 }
-
             }
         });
     }
 
     private void selectionChange() {
-        projectInfoTxt.setText(Main.projectHandler.projectToString(projectCombo.getSelectedItem().toString()));
-
+        descriptionTxt.setText(Main.taskHandler.taskToString(taskCombo.getSelectedItem().toString()));
     }
 
     private void populateComboBox() {
 
-        System.out.println("ProjectInfoForm.populateComboBox");
-        for(int i=0;i<Main.projectHandler.getProjects().size();i++){
-
-            projectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
+        System.out.println("TaskInfoForm.populateComboBox");
+        for(int i=0;i<Main.taskHandler.getTasks().size();i++){
+            taskCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());
         }
     }
 }

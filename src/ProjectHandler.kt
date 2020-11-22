@@ -151,11 +151,12 @@ class ProjectHandler() {
     }
 
     fun projectToString(projectName: String) : String{
-
         val selectedProject = findProject(projectName)
-        return "Project Name: ${selectedProject.projectName} \n " +
-                "Start Date: ${selectedProject.projectStartDate} \n \n" +
-                "Description: ${selectedProject.projectDescription} \n "
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+
+        return "\nProject Name: ${selectedProject.projectName} \n" +
+                "Start Date: ${sdf.format(selectedProject.projectStartDate)} \n \n" +
+                "Description: \n${selectedProject.projectDescription} \n "
     }
 }
 

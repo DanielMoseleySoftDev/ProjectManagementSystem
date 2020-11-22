@@ -49,11 +49,17 @@ public class DeleteTeamForm extends CommonUIMethods{
         //todo implement delete team
         String selectedTeam = teamCombo.getSelectedItem().toString();
         Team foundTeam = Main.teamHandler.findTeam(selectedTeam);
-        int teamIndex = Main.teamHandler.getTeams().indexOf(foundTeam);
-        Main.teamHandler.deleteTeam(teamIndex);
 
-        System.out.println("DeleteTeamForm.deleteButtonPressed");
-        onExit(mainFrame);
+        if(!foundTeam.getTeamName().equals("N/A")){
+            int teamIndex = Main.teamHandler.getTeams().indexOf(foundTeam);
+            Main.teamHandler.deleteTeam(teamIndex);
+
+            System.out.println("DeleteTeamForm.deleteButtonPressed");
+            onExit(mainFrame);
+        }else{
+            System.out.println("Cannot delete N/A");
+        }
+
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {

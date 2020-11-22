@@ -11,14 +11,43 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="12761" class="javax.swing.JComboBox" binding="projectCombo">
-        <constraints border-constraint="North"/>
-        <properties/>
-      </component>
-      <component id="11dd9" class="javax.swing.JTextArea" binding="projectInfoTxt">
+      <grid id="9520e" binding="centerPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints border-constraint="Center"/>
         <properties/>
-      </component>
+        <border type="bevel-lowered"/>
+        <children>
+          <component id="a2c89" class="javax.swing.JTextArea" binding="projectInfoTxt">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <editable value="false"/>
+              <lineWrap value="true"/>
+            </properties>
+          </component>
+          <vspacer id="16c79">
+            <constraints border-constraint="North"/>
+          </vspacer>
+          <hspacer id="417ce">
+            <constraints border-constraint="East"/>
+          </hspacer>
+          <hspacer id="e3b1d">
+            <constraints border-constraint="West"/>
+          </hspacer>
+          <vspacer id="c3792">
+            <constraints border-constraint="South"/>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="413a9" binding="northPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="bevel-lowered"/>
+        <children>
+          <component id="9b87e" class="javax.swing.JComboBox" binding="projectCombo">
+            <constraints border-constraint="Center"/>
+            <properties/>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>

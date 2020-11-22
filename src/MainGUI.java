@@ -127,6 +127,12 @@ public class MainGUI extends JFrame{
                 projectInfoButtonPressed();
             }
         });
+        taskInfoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                taskInfoButtonPressed();
+            }
+        });
     }
 
 
@@ -280,6 +286,11 @@ public class MainGUI extends JFrame{
         this.setEnabled(false);
     }
 
+    private void taskInfoButtonPressed() {
+        System.out.println("taskInfoButtonPressed");
+        TaskInfoForm popout = new TaskInfoForm(this);
+        this.setEnabled(false);
+    }
 
     //-----------------------------------------------------------------------
 
