@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -19,6 +20,8 @@ public class AddTaskForm extends CommonUIMethods{
     private JScrollPane descriptionScrollPanel;
     private JTextField estDaysTxt;
     private JTextField preReqTxt;
+    private JLabel nameLbl;
+    private JLabel daysLbl;
     private String taskName;
     private Date estStartDate;
     private Date estFinishDate;
@@ -57,10 +60,13 @@ public class AddTaskForm extends CommonUIMethods{
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                nameLbl.setForeground(Color.BLACK);
+                daysLbl.setForeground(Color.BLACK);
                 try{
                     addButtonPressed(mainFrame);
                 } catch (NumberFormatException f) {
                     System.out.println("Add Task form - wrong format");
+                    daysLbl.setForeground(Color.RED);
                 }
 
             }
@@ -95,6 +101,7 @@ public class AddTaskForm extends CommonUIMethods{
             Main.taskHandler.createTask(taskName,estDays,team,taskDescription,preReq,mainFrame);
             onExit(mainFrame);
         } else{
+            nameLbl.setForeground(Color.RED);
             JOptionPane.showMessageDialog(this, "Illegal task name. \n " +
                     "Please choose a different one","Warning" ,JOptionPane.WARNING_MESSAGE);
             stopFlag = false;
