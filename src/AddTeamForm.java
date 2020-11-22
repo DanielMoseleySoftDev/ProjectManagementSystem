@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -13,6 +14,7 @@ public class AddTeamForm extends CommonUIMethods{
     private JPanel actionPanel;
     private JPanel inputPanel;
     private JScrollPane descriptionPanel;
+    private JLabel nameLbl;
     private String teamName;
     private String teamDescription;
     public boolean stopFlag = false;
@@ -44,6 +46,7 @@ public class AddTeamForm extends CommonUIMethods{
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                nameLbl.setForeground(Color.BLACK);
                 addButtonPressed(mainFrame);
             }
         });
@@ -68,6 +71,7 @@ public class AddTeamForm extends CommonUIMethods{
             System.out.println("Team created \n" + Main.teamHandler.getTeams());
             onExit(mainFrame);
         }else{
+            nameLbl.setForeground(Color.RED);
             JOptionPane.showMessageDialog(this, "Team name exists \n " +
                     "Please choose a different one","Warning" ,JOptionPane.WARNING_MESSAGE);
             stopFlag = false;
