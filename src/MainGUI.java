@@ -12,16 +12,13 @@ public class MainGUI extends JFrame{
     private JTextField projectLoadedTxt;
     private JTextField expFinTxt;
     private JPanel centerPanel;
-    private JButton saveButton;
     private JButton openProjectButton;
     private JButton addProjectButton;
     private JButton addTaskButton;
     private JButton deleteTaskButton;
     private JButton completeTaskButton;
     private JButton deleteProjectButton;
-    private JButton CriticalButton;
     private JButton addTeamButton;
-    private JButton editTeamButton;
     private JButton deleteTeamButton;
     private JScrollPane activeTaskScrollPanel;
     private JScrollPane waitingTaskScrollPanel;
@@ -29,6 +26,7 @@ public class MainGUI extends JFrame{
     private JTable waitingTaskTable;
     private JTable completedTaskTable;
     private JComboBox critPathSelectionCombo;
+    private JTextField daysLeftTxt;
     private DefaultTableModel activeModel;
     private DefaultTableModel waitingModel;
     private DefaultTableModel completeModel;
@@ -54,18 +52,14 @@ public class MainGUI extends JFrame{
         createTaskTable("active");
         createTaskTable("waiting");
         createTaskTable("completed");
-        System.out.println("--------------------------\n");
+
         critPathSelectionCombo.addItem("Kotlin");
         critPathSelectionCombo.addItem("Scala");
+        System.out.println("--------------------------\n");
 
 
 
         //--------------ACTION LISTENERS---------------------------------
-        CriticalButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { criticalButtonPressed(); }
-        });
-
 
         openProjectButton.addActionListener(new ActionListener() {
             @Override
@@ -104,17 +98,10 @@ public class MainGUI extends JFrame{
                 deleteProjectButtonPressed();
             }
         });
-
         addTeamButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addTeamButtonPressed();
-            }
-        });
-        editTeamButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editTeamButtonPressed();
             }
         });
         deleteTeamButton.addActionListener(new ActionListener() {
@@ -134,6 +121,7 @@ public class MainGUI extends JFrame{
         });
     }
 
+    //-----------------GUI METHODS----------------------------------------
     private void critPathAlgorithmChange() {
         if(critPathSelectionCombo.getSelectedItem().toString() == "Kotlin"){
             iskotlin = true;
@@ -145,14 +133,12 @@ public class MainGUI extends JFrame{
         updateTaskPanels();
     }
 
-
     public void updateLoadedProject(){
         //update the loaded project of the system
         projectLoadedTxt.setText(Main.projectHandler.getCurrentProject().getProjectName());
         System.out.println("MainGUI.updateLoadedProject -> Updated loadedProjectTxt");
         updateTaskPanels();
     }
-
 
     public void updateTaskPanels() {
         if(loadedFlag){
@@ -161,6 +147,7 @@ public class MainGUI extends JFrame{
         }
 
         expFinTxt.setText(Main.projectHandler.calculateEndDate());
+        daysLeftTxt.setText((Main.projectHandler.calculateDaysLeft()));
 
         Main.taskHandler.updateTaskTables(activeModel,waitingModel,completeModel);
         System.out.println("Task Panels Updated");
@@ -180,8 +167,6 @@ public class MainGUI extends JFrame{
         System.out.println("MainGui.toggleTaskOptionsEnabled -> Task Options Enabled = "+loadedFlag);
 
     }
-
-
 
     private void createTaskTable(String type) {
         System.out.println("Creating Table...");
@@ -217,19 +202,12 @@ public class MainGUI extends JFrame{
 
     }
 
-
     //----------------BUTTON PRESSED METHODS--------------------------------
 
     private void deleteTeamButtonPressed() {
         //todo implement delete
         System.out.println("delete team button pressed");
         DeleteTeamForm popout = new DeleteTeamForm(this);
-        this.setEnabled(false);
-    }
-
-    private void editTeamButtonPressed() {
-        System.out.println("edit team button pressed");
-        EditTeamForm popout = new EditTeamForm(this);
         this.setEnabled(false);
     }
 
@@ -283,13 +261,6 @@ public class MainGUI extends JFrame{
         System.out.println("openProjectButtonPressed");
         OpenProjectForm popout = new OpenProjectForm(this);
         this.setEnabled(false);
-
-    }
-
-    private void criticalButtonPressed() {
-        System.out.println("CriticalButtonPressed");
-        System.out.println(Main.criticalPathHandler.calcCriticalPath(true));
-
 
     }
 

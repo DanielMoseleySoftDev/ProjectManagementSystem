@@ -1,5 +1,5 @@
 import java.lang.Exception
-import java.time.Duration
+import java.text.SimpleDateFormat
 import java.util.*
 
 import kotlin.collections.ArrayList
@@ -44,6 +44,14 @@ class ProjectHandler() {
     }
 
     fun calculateEndDate(): String{
+        val endDate = Calendar.getInstance()        //gets today
+        endDate.add(Calendar.DATE,projectDuration)
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+
+        return sdf.format(endDate.time)
+    }
+
+    fun calculateDaysLeft(): String{
         return projectDuration.toString()
     }
 
