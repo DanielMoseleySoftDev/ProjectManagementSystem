@@ -142,6 +142,7 @@ public class MainGUI extends JFrame{
             iskotlin = false;
             System.out.println("Critical Path Algorithm changed. True = Kotlin, False = Scala: "+iskotlin);
         }
+        updateTaskPanels();
     }
 
 
