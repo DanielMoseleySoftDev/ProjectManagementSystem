@@ -20,12 +20,19 @@ class CriticalPathScala {
 
       while(iterator.hasNext) {
         val job : Job = iterator.next()
-        //if (job.getListOfChildren.forEach(child => completed.contains(child)))
-        val childHashSet = new mutable.LinkedHashSet[Job]
-        childHashSet.add(job.getListOfChildren.forEach())
-        job.getListOfChildren.forEach(child => if(completed.contains(child)) {
+        val childHashSet = new HashSet[Job]
+        job.getListOfChildren.forEach(child => childHashSet.add(child))
+        if(childHashSet.subsetOf(completed)) {
+          var critical = 0
+          childHashSet.foreach(child => if(child.getCriticalDuration > critical) {
+            critical = child.getCriticalDuration
+          })
+          job.setCriticalDuration(critical + job.getDuration)
+          completed.add(job)
+          iterator.
+          }
 
-        })
+        }
       }
 
 
