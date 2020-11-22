@@ -49,9 +49,15 @@ public class CompleteTaskForm extends CommonUIMethods{
 
     private void completeButtonPressed(MainGUI mainFrame) {
         System.out.println("CompleteTaskForm.completeButtonPressed");
-        String selectedTask = taskCombo.getSelectedItem().toString();
 
-        Main.taskHandler.completeTask(selectedTask, mainFrame);
+        if(taskCombo.getItemCount() != 0){
+            String selectedTask = taskCombo.getSelectedItem().toString();
+            Main.taskHandler.completeTask(selectedTask, mainFrame);
+        }else{
+            System.out.println("CompleteTaskForm.completeButtonPressed -> No Task Selected");
+            JOptionPane.showMessageDialog(this,"No Tasks.\nPlease create task first","Error: No Tasks",JOptionPane.ERROR_MESSAGE);
+        }
+
         onExit(mainFrame);
     }
 

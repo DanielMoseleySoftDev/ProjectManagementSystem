@@ -18,9 +18,10 @@ public class ProjectInfoForm extends CommonUIMethods{
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Project Info - Project Management System");
-        populateComboBox();
+        populateComboBox(mainFrame);
         selectionChange();
         setVisible(true);
+
 
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
@@ -39,16 +40,22 @@ public class ProjectInfoForm extends CommonUIMethods{
     }
 
     private void selectionChange() {
-        projectInfoTxt.setText(Main.projectHandler.projectToString(projectCombo.getSelectedItem().toString()));
-
+        if(Main.projectHandler.getProjects().size() != 0) {
+            projectInfoTxt.setText(Main.projectHandler.projectToString(projectCombo.getSelectedItem().toString()));
+        }
     }
 
-    private void populateComboBox() {
+    private void populateComboBox(MainGUI mainFrame) {
 
         System.out.println("ProjectInfoForm.populateComboBox");
-        for(int i=0;i<Main.projectHandler.getProjects().size();i++){
+        if(Main.projectHandler.getProjects().size() != 0){
+            for(int i=0;i<Main.projectHandler.getProjects().size();i++){
+                projectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "No projects to show",
+                    "Warning" ,JOptionPane.WARNING_MESSAGE);
 
-            projectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
         }
     }
 }
