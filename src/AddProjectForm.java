@@ -73,11 +73,14 @@ public class AddProjectForm extends CommonUIMethods{
         //todo implement addButtonPressed
         System.out.println("AddProjectForm.addButtonPressed");
 
+
+
         String projectName = projectNameTxt.getText();
         String description = descriptionTxt.getText();
         Date startDate = dateFormat.parse(dateTxt.getText());
         Main.projectHandler.createProject(projectName, startDate, description);
         System.out.println("Added project to list of projects:\n"+Main.projectHandler.getProjects());
+
         mainFrame.setLoadedFlag(true);
         mainFrame.updateLoadedProject();
         onExit(mainFrame);

@@ -19,7 +19,6 @@ public class AddTaskForm extends CommonUIMethods{
     private JScrollPane descriptionScrollPanel;
     private JTextField estDaysTxt;
     private JTextField preReqTxt;
-
     private String taskName;
     private Date estStartDate;
     private Date estFinishDate;
@@ -27,7 +26,7 @@ public class AddTaskForm extends CommonUIMethods{
     private Team team;
     private String taskDescription;
     private String preReq;
-
+    public boolean stopFlag = false;
 
 
     public AddTaskForm(MainGUI mainFrame){
@@ -74,7 +73,18 @@ public class AddTaskForm extends CommonUIMethods{
     private void addButtonPressed(MainGUI mainFrame) throws NumberFormatException {
         //todo implement addButtonPressed
         System.out.println("AddTaskForm.addButtonPressed");
-        if(taskNameTxt.getText() != "Remaining critical duration:"){
+        taskName = taskNameTxt.getText();
+        if(taskName.equals("S-Startingpoint") || taskName.equals("E-Finishingpoint") || taskName.equals("Remaining critical duration:")){
+            stopFlag = true;
+        }
+        for (int i=0; i<Main.taskHandler.getTasks().size();i++){
+            if(taskName.equals(Main.taskHandler.getTasks().get(i).getTaskName())){
+                stopFlag = true;
+                break;
+            }
+        }
+
+        if(!stopFlag){
             taskName = taskNameTxt.getText();
             estDays = Integer.parseInt(estDaysTxt.getText());
             taskDescription = descriptionTxt.getText();
