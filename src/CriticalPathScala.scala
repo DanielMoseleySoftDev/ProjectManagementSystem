@@ -6,7 +6,6 @@ import scala.collection.mutable.HashSet
 
 
 class CriticalPathScala {
-
   def calculateCriticalPath(jobs: util.HashSet[Job]): Array[Job] ={
     println("SCALA TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     val completed = new HashSet[Job]()
@@ -15,7 +14,7 @@ class CriticalPathScala {
 
 
     def backflow(): HashSet[Job] ={
-      var progess = false
+      var progress = false
       val iterator = remaining.iterator
 
       while(iterator.hasNext) {
@@ -29,20 +28,21 @@ class CriticalPathScala {
           })
           job.setCriticalDuration(critical + job.getDuration)
           completed.add(job)
-          iterator.
+
+          remaining.remove(job)
+          progress = true
           }
-
         }
+
+      if(!progress) throw new RuntimeException ("There is a dependency cycle, cannot calculate critical path!")
+      //if remaining isn't empty recursively call the function
+      if (remaining.nonEmpty) {
+        backflow()
       }
 
-
-      if(remaining.nonEmpty){
-        backflow()//Todo edit input to remaining minus this iteration
-      }
-      completed
     }
 
-    backflow()
+
 
 
 
