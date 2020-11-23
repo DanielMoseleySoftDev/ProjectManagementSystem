@@ -82,6 +82,11 @@ public class AddProjectForm extends CommonUIMethods{
         String projectName = projectNameTxt.getText();
         String description = descriptionTxt.getText();
         Date startDate = dateFormat.parse(dateTxt.getText());
+        if(projectName.isEmpty()){
+            nameLbl.setForeground(Color.RED);
+            JOptionPane.showMessageDialog(this, "Project name cannot be empty","Warning" ,JOptionPane.WARNING_MESSAGE);
+            stopFlag=true;
+        }
 
         for (int i=0; i<Main.projectHandler.getProjects().size();i++){
             if(projectName.equals(Main.projectHandler.getProjects().get(i).getProjectName())){
@@ -100,10 +105,12 @@ public class AddProjectForm extends CommonUIMethods{
             mainFrame.updateLoadedProject();
             onExit(mainFrame);
         }else{
-            nameLbl.setForeground(Color.RED);
-            JOptionPane.showMessageDialog(this, "Project already exists \n " +
-                    "Please choose a different name","Warning" ,JOptionPane.WARNING_MESSAGE);
-            stopFlag = false;
+            if(!projectName.isEmpty()) {
+                nameLbl.setForeground(Color.RED);
+                JOptionPane.showMessageDialog(this, "Project already exists \n " +
+                        "Please choose a different name","Warning" ,JOptionPane.WARNING_MESSAGE);
+                stopFlag = false;
+            }
         }
     }
 }

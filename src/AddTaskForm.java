@@ -80,6 +80,11 @@ public class AddTaskForm extends CommonUIMethods{
         //todo implement addButtonPressed
         System.out.println("AddTaskForm.addButtonPressed");
         taskName = taskNameTxt.getText();
+        if(taskName.isEmpty()){
+            nameLbl.setForeground(Color.RED);
+            JOptionPane.showMessageDialog(this, "Task name cannot be empty","Warning" ,JOptionPane.WARNING_MESSAGE);
+            stopFlag=true;
+        }
         if(taskName.equals("S-Startingpoint") || taskName.equals("E-Finishingpoint") || taskName.equals("Remaining critical duration:")){
             stopFlag = true;
         }
@@ -101,10 +106,12 @@ public class AddTaskForm extends CommonUIMethods{
             Main.taskHandler.createTask(taskName,estDays,team,taskDescription,preReq,mainFrame);
             onExit(mainFrame);
         } else{
-            nameLbl.setForeground(Color.RED);
-            JOptionPane.showMessageDialog(this, "Illegal task name. \n " +
-                    "Please choose a different one","Warning" ,JOptionPane.WARNING_MESSAGE);
-            stopFlag = false;
+            if(!taskName.isEmpty()){
+                nameLbl.setForeground(Color.RED);
+                JOptionPane.showMessageDialog(this, "Illegal task name. \n " +
+                        "Please choose a different one","Warning" ,JOptionPane.WARNING_MESSAGE);
+                stopFlag = false;
+            }
         }
     }
 
