@@ -82,7 +82,7 @@ public class AddProjectForm extends CommonUIMethods{
         String projectName = projectNameTxt.getText();
         String description = descriptionTxt.getText();
         Date startDate = dateFormat.parse(dateTxt.getText());
-        if(projectName.isEmpty()){
+        if(projectName.isEmpty()){ //Checks if the project name is empty and changes the flag for the exception
             nameLbl.setForeground(Color.RED);
             JOptionPane.showMessageDialog(this, "Project name cannot be empty","Warning" ,JOptionPane.WARNING_MESSAGE);
             stopFlag=true;
@@ -105,7 +105,7 @@ public class AddProjectForm extends CommonUIMethods{
             mainFrame.updateLoadedProject();
             onExit(mainFrame);
         }else{
-            if(!projectName.isEmpty()) {
+            if(!projectName.isEmpty()) {//If the Project name error has been found then this is not the error
                 nameLbl.setForeground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Project already exists \n " +
                         "Please choose a different name","Warning" ,JOptionPane.WARNING_MESSAGE);
