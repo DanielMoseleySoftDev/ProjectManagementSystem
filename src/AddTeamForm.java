@@ -57,9 +57,10 @@ public class AddTeamForm extends CommonUIMethods{
         System.out.println("AddTeamForm.addButtonPressed");
         teamName = nameTxt.getText();
         teamDescription = descriptionTxt.getText();
-        if(teamName.equals("N/A")){
+        if(teamName.equals("N/A") || teamName.isEmpty()){
             stopFlag  = true;
         }
+
         for (int i=0; i<Main.teamHandler.getTeams().size();i++) {
                 if(teamName.equals(Main.teamHandler.getTeams().get(i).getTeamName())){
                     stopFlag = true;
@@ -72,7 +73,7 @@ public class AddTeamForm extends CommonUIMethods{
             onExit(mainFrame);
         }else{
             nameLbl.setForeground(Color.RED);
-            JOptionPane.showMessageDialog(this, "Team name exists \n " +
+            JOptionPane.showMessageDialog(this, "Team name exists or is empty \n " +
                     "Please choose a different one","Warning" ,JOptionPane.WARNING_MESSAGE);
             stopFlag = false;
         }
