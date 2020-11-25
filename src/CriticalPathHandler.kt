@@ -13,7 +13,9 @@ class CriticalPathHandler {
         criticalInfo.clear()
         criticalTasks = arrayListOf()
 
+        //Get descendants of tasks. Format for critical path algorithm
         flipChildParentNodes(Main.taskHandler.tasks)
+        //Convert list of jobs to HashSet
         val jobSet = listToSet()
         val returnJobs: Array<Job>
         if (jobsList.isEmpty()){
@@ -21,15 +23,16 @@ class CriticalPathHandler {
         }
 
         if (isKotlin){
-            //Kotlin
+            //Kotlin algorithm
             println("CriticalPathHandler.CalcCriticalPath -> Kotlin Algorithm")
             returnJobs =  CriticalPathKotlin.calculateCriticalPath(jobSet)
         }else{
-            //Scala
+            //Scala algorithm
             println("CriticalPathHandler.CalcCriticalPath -> Scala Algorithm")
             returnJobs = Main.scalaHandler.calculateCriticalPath(jobSet)
         }
 
+        //Convert the returned jobs into format that can be used for displaying
         toStringArray(returnJobs)
         criticalTasks.add(criticalInfo)
         return criticalTasks
@@ -38,17 +41,14 @@ class CriticalPathHandler {
 
     private fun toStringArray(returnJobs : Array<Job>) {
         for (job in returnJobs){
-            if(job.jobStatus != Status.COMPLETE){
+            if(job.jobStatus != Status.COMPLETE){   //Don't want to include completed Tasks in critical path
                 val jobInfo = ArrayList<String>()
                 jobInfo.add(job.jobName)
-                val slack = job.lateFinish-job.earlyFinish
+                val slack = job.lateFinish-job.earlyFinish //Task with 0 slack is considered critical
                 jobInfo.add(slack.toString())
                 criticalTasks.add(jobInfo)
             }
         }
-
-
-
     }
 
     fun flipChildParentNodes(tasks: ArrayList<Task>){
@@ -77,6 +77,10 @@ class CriticalPathHandler {
     }
 
     private fun addStartAndEnd(){
+        /*
+        * There can be multiple tasks happening concurrently. To ensure the DAG has a set Start
+        * and End node, they are artificially added here with a duration of 0.
+        */
         val beginningJobs = ArrayList<Job>()
         for((count, task) in taskList.withIndex()){
             if(task.preReqTasks.isEmpty()){
@@ -84,6 +88,7 @@ class CriticalPathHandler {
 
             }
         }
+        //TODO THIS NEEDS TO BE CHANGED: START END NODES
         jobsList.add(0, Job("START", 0,Status.COMPLETE, beginningJobs))
         jobsList.add(jobsList.size, Job( "END",0,Status.COMPLETE))
         for (job in jobsList) {
