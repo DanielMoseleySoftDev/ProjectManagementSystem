@@ -8,7 +8,6 @@ class Job(val jobName: String, val duration: Int, val jobStatus: Status,var list
     var earlyFinish = 0
     var lateStart = 0
     var lateFinish = 0
-    //val jobStatus = Status.NO_STATUS
 
     fun setLatest(maxDuration: Int){
         lateStart = maxDuration - criticalDuration

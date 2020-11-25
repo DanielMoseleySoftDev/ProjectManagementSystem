@@ -12,6 +12,7 @@ class ProjectHandler() {
     //Variables
     val p = Persistence()
     var projects = ArrayList<Project>()
+    //default no project selected
     var currentProject = Project(
         "No Project Selected",
         projectStartDate = Date(),
@@ -21,10 +22,12 @@ class ProjectHandler() {
 
 
     init {
+        //load projects into memory
         loadProjects()
     }
 
     fun calculateCriticalPath(isKotlin: Boolean){
+        //Checks if there any task in the project before calculating critical path
         if(Main.taskHandler.tasks.isNotEmpty()){
             val criticalInformation = Main.criticalPathHandler.calcCriticalPath(isKotlin)
             try {
@@ -45,7 +48,7 @@ class ProjectHandler() {
 
     fun calculateEndDate(): String{
         val endDate = Calendar.getInstance()        //gets today
-        endDate.add(Calendar.DATE,projectDuration)
+        endDate.add(Calendar.DATE,projectDuration)  //Adds project duration to get end date
         val sdf = SimpleDateFormat("dd-MM-yyyy")
 
         return sdf.format(endDate.time)
@@ -63,15 +66,12 @@ class ProjectHandler() {
         saveProjects()
 
         selectProject(projects.last().projectName)
-
-
-
     }
 
     fun deleteProject(projectIndex: Int) : Boolean{
         //projects.removeAt(projectIndex)
         //saveProjects()
-
+        //TODO remove useless comments
         return if(projects[projectIndex]==currentProject){
             projects.removeAt(projectIndex)
             saveProjects()
@@ -110,17 +110,11 @@ class ProjectHandler() {
             println("Projects file was empty on load")
             println("-------------------------\n")
         }
-
-
     }
 
     fun saveProjects(){
-
         p.saveToFile(projects)
         println(projects + "\n")
-
-
-
     }
 
     fun selectProject(selectedProjectStr: String){
@@ -147,7 +141,6 @@ class ProjectHandler() {
     private fun setProjectTasks(){
         Main.taskHandler.tasks = currentProject.Tasks
         println("ProjectHandler.selectProject -> Main.taskHandler.tasks set to currentProjects tasks:\n" + Main.taskHandler.tasks)
-
     }
 
     fun projectToString(projectName: String) : String{
