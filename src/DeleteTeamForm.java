@@ -46,7 +46,6 @@ public class DeleteTeamForm extends CommonUIMethods{
 
     //------------Methods--------------------------------------------------
     private void deleteButtonPressed(JFrame mainFrame) {
-        //todo implement delete team
         String selectedTeam = teamCombo.getSelectedItem().toString();
         Team foundTeam = Main.teamHandler.findTeam(selectedTeam);
 
@@ -63,7 +62,6 @@ public class DeleteTeamForm extends CommonUIMethods{
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
-        //todo implement cancelButtonPressed
         System.out.println("DeleteTeamForm.cancelButtonPressed");
         onExit(mainFrame);
     }

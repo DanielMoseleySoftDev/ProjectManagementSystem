@@ -14,13 +14,13 @@ class Persistence {
                 "Save Started - File path: \n $projectFile " +
                 "\n-------------------------")
         try {
-            ObjectOutputStream(FileOutputStream(projectFile)).use{ it -> it.writeObject(list)} //Lambda used to save to file
+            //Lambda used to save to file
+            ObjectOutputStream(FileOutputStream(projectFile)).use{ it -> it.writeObject(list)}
         }catch (ioe:IOException){
             println("Error: Unable to save - IO Exception")
         }
 
         println("List of Projects Saved to file\n")
-
     }
 
     fun saveToFile(list : ArrayList<Team>, bool: Boolean) {
@@ -28,7 +28,8 @@ class Persistence {
                 "Save Started - File path: \n $teamsFile " +
                 "\n-------------------------")
         try {
-            ObjectOutputStream(FileOutputStream(teamsFile)).use{ it -> it.writeObject(list)} //Lambda used to save to file
+            //Lambda used to save to file
+            ObjectOutputStream(FileOutputStream(teamsFile)).use{ it -> it.writeObject(list)}
         }catch (ioe:IOException){
             println("Error: Unable to save - IO Exception")
         }

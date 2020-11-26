@@ -77,7 +77,6 @@ public class AddTaskForm extends CommonUIMethods{
 
     //-------------Methods-----------------------------------------
     private void addButtonPressed(MainGUI mainFrame) throws NumberFormatException {
-        //todo implement addButtonPressed
         System.out.println("AddTaskForm.addButtonPressed");
         taskName = taskNameTxt.getText();
         if(taskName.isEmpty()){//Checks if the task name is empty and changes the flag for the exception
@@ -116,7 +115,6 @@ public class AddTaskForm extends CommonUIMethods{
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
-        //todo implement cancelButtonPressed
         System.out.println("AddTaskForm.cancelButtonPressed");
         onExit(mainFrame);
     }

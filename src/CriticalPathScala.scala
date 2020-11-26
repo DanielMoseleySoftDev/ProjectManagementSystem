@@ -68,7 +68,7 @@ class CriticalPathScala {
 
     // This recursive back-flow algorithm prevents us from needing a nested while loop
     @tailrec
-    def backFlow(): Unit ={
+    def recursiveCalculation(): Unit ={
       var progress = false
       val iterator = remaining.iterator
 
@@ -89,17 +89,17 @@ class CriticalPathScala {
           }
         }
 
-      if(!progress) throw new RuntimeException ("There is a dependency cycle, cannot calculate critical path!")
+      if(!progress) throw new RuntimeException ("CriticalPathScala.calculateCriticalPath -> Error: Loop in graph")
 
       // If remaining isn't empty recursively call the function
       if (remaining.nonEmpty) {
-        backFlow()
+        recursiveCalculation()
       }
 
     }
 
     // Initial function call
-    backFlow()
+    recursiveCalculation()
 
     val maxDuration = calcMaxDuration(jobs)
     val initialNodes : HashSet[Job] = setStartingJobs(jobs)

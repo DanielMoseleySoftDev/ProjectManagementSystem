@@ -30,8 +30,6 @@ class TaskHandler() {
         waitingTable.setNumRows(0)
         completeTable.setNumRows(0)
 
-
-
         println("TaskHandler.updateTaskTables -> adding tasks to rows")
         if(tasks.isNotEmpty()){
             for(task in tasks){
@@ -61,9 +59,11 @@ class TaskHandler() {
     }
 
     private fun isCritical(name : String): String {
+        //Checks to see if the task is critical
         var count = 0
         for (job in critInfo){
             if (name == job[0] && job[1] =="0"){
+                //returns a tick
                 return "\u2713"
             }
             count++
@@ -72,6 +72,8 @@ class TaskHandler() {
     }
 
     private fun getSlack(name: String): String {
+        //returns how many days a job can be delayed before delaying
+        // the whole project.
         println(critInfo)
         for (job in critInfo){
             if (name == job[0]){
@@ -82,6 +84,7 @@ class TaskHandler() {
     }
 
     fun getPreReqToString(task: Task) : String{
+        //returns pre-requisites as a string
         println("TaskHandler.getPreReqToString")
         var taskStr =""
         for(i in task.preReqTasks){
@@ -195,18 +198,17 @@ class TaskHandler() {
     }
 
     private fun removeTaskFromPreReq(selectedTaskName: String) {
-        //TODO("CALCULATE TASK STATUS MAY MOVE INTO LOOP")
+
         println("TaskHandler.deleteTask.removeFromPreReq -> removing deleted task from pre-req's")
         for (i in tasks){
             for (j in i.preReqTasks){
                 if (selectedTaskName == j.taskName){
                     i.preReqTasks.remove(j)
                     break
-                    //calculateTaskStatus(i)  //recalculating the statuses
                 }
             }
-            //calculateTaskStatus(i)
         }
+        //Re-calculating the status of Tasks and updating
         for(i in tasks){
             calculateTaskStatus(i)
         }
@@ -214,12 +216,6 @@ class TaskHandler() {
         println("TaskHandler.deleteTask.removeFromPreReq -> deleted task from pre-req removed")
     }
 
-    private fun calculateEstStartDate() : Calendar{
-        //TODO("Not yet implemented")
-        var calendar = Calendar.getInstance()
-        calendar.set(2020, 11, 5)
-        return calendar
-    }
 
     private fun calculateTaskStatus(task: Task) {
         println("TaskHandler.calculateTaskStatus -> Calculating...")

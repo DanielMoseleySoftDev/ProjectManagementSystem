@@ -31,6 +31,7 @@ class ProjectHandler() {
         if(Main.taskHandler.tasks.isNotEmpty()){
             val criticalInformation = Main.criticalPathHandler.calcCriticalPath(isKotlin)
             try {
+                //Last element of ArrayList is the project calculated duration
                 projectDuration = criticalInformation.last()[1].toInt()
 
             }catch (ex : Exception){
@@ -62,16 +63,14 @@ class ProjectHandler() {
         println("ProjectHandler.createProject (Kt)- creating started")
         projects.add(Project(projectName, projectStartDate, projectDescription = projectDescription))
         println("ProjectHandler.createProject (Kt)- created")
-        //projects would then be save to file
+        //projects would then be saved to file
         saveProjects()
 
         selectProject(projects.last().projectName)
     }
 
     fun deleteProject(projectIndex: Int) : Boolean{
-        //projects.removeAt(projectIndex)
-        //saveProjects()
-        //TODO remove useless comments
+
         return if(projects[projectIndex]==currentProject){
             projects.removeAt(projectIndex)
             saveProjects()
@@ -86,10 +85,7 @@ class ProjectHandler() {
             projects.removeAt(projectIndex)
             saveProjects()
             currentProject.projectName != "No Project Selected"
-
         }
-        //currentProject = Project("No Project Selected",projectStartDate = Date(),projectDescription = "No project selected")
-        //Main.taskHandler.tasks.clear()
     }
 
     fun findProject(projectName: String) : Project{

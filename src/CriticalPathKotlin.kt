@@ -16,13 +16,12 @@ class CriticalPathKotlin {
             // jobs whose critical cost needs to be calculated
             var remaining = HashSet(jobs)
 
-            // Backflow algorithm
-            // while there are tasks whose critical cost isn't calculated.
-            while (!remaining.isEmpty()) {
+
+            while (remaining.isNotEmpty()) {
 
                 var progress = false
 
-                // find a new task to calculate
+                // Iterate over each job
                 val iterator: MutableIterator<Job> = remaining.iterator()
                 while (iterator.hasNext()) {
                     val job: Job = iterator.next()
@@ -37,7 +36,7 @@ class CriticalPathKotlin {
                         }
                         job.criticalDuration = criticalDuration + job.duration
 
-                        // add job to completed and remove from remainin
+                        // add job to completed and remove from remaining
                         completed.add(job)
                         iterator.remove()
 
@@ -45,9 +44,9 @@ class CriticalPathKotlin {
                         progress = true
                     }
                 }
-                // If we haven't made any progress then a cycle must exist in
-                // the graph and we wont be able to calculate the critical path
-                if (!progress) throw RuntimeException("Cyclic dependency, algorithm stopped!")
+                // If progress isn't made then the algorithm is stuck in a loop because there
+                //are cycles in the graph. it is not a DAG
+                if (!progress) throw RuntimeException("CriticalPathKotlin.calculateCriticalPath -> Error: Loop in graph")
             }
 
             // calculate the critical duration (total critical path value)
@@ -82,19 +81,23 @@ class CriticalPathKotlin {
         }
 
         private fun findStartingJobs(jobs: Set<Job>): HashSet<Job> {
+            /* All jobs that don't have a predecessor get returned.
+            * Multiple Tasks can be active at the same time, therefore
+            * the start of the graph is not a single point. Theoretically,
+            * there could be hundreds of independent graphs (Task chains)
+            * in a project. This returned HashSet allows the program to
+            * artificially put a single starting node.*/
+
             val remaining: HashSet<Job> = HashSet<Job>(jobs)
             for (job in jobs) {
                 for (child in job.listOfChildren) {
                     remaining.remove(child)
                 }
             }
-            print("Starting jobs: ")
-            for (job in remaining) print(job.jobName + " ")
-            print("\n\n")
             return remaining
         }
 
-        fun calcEarly(startingJobs: HashSet<Job>) {
+        private fun calcEarly(startingJobs: HashSet<Job>) {
             for (job in startingJobs) {
                 job.earlyStart = 0
                 job.earlyFinish = job.duration

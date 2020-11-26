@@ -1,8 +1,8 @@
 class CriticalPathHandler {
 
-    var jobsList = ArrayList<Job>()
-    var taskList = ArrayList<Task>()
-    var criticalTasks = arrayListOf<ArrayList<String>>()
+    private var jobsList = ArrayList<Job>()
+    private var taskList = ArrayList<Task>()
+    private var criticalTasks = arrayListOf<ArrayList<String>>()
     var criticalInfo = ArrayList<String>()
 
     fun calcCriticalPath(isKotlin : Boolean) : ArrayList<ArrayList<String>>{
@@ -64,6 +64,7 @@ class CriticalPathHandler {
         if(jobsList.isEmpty()){
             return
         }
+        //Finding nodes descendants based on list of ancestors
         for ((count, i) in taskList.withIndex()){
             for ((countB, j) in taskList.withIndex()){
                 for (preReq in j.preReqTasks){
@@ -88,18 +89,20 @@ class CriticalPathHandler {
 
             }
         }
-        //TODO THIS NEEDS TO BE CHANGED: START END NODES
-        jobsList.add(0, Job("START", 0,Status.COMPLETE, beginningJobs))
-        jobsList.add(jobsList.size, Job( "END",0,Status.COMPLETE))
+
+        jobsList.add(0, Job("S-Startingpoint", 0,Status.COMPLETE, beginningJobs))
+        jobsList.add(jobsList.size, Job( "E-Finishingpoint",0,Status.COMPLETE))
         for (job in jobsList) {
-            if(job.listOfChildren.isEmpty() && job.jobName!="END"){
+            if(job.listOfChildren.isEmpty() && job.jobName!="E-Finishingpoint"){
                 job.listOfChildren.add(jobsList.last())
             }
         }
-
     }
 
     private fun createJobsList() {
+        /*creating a new object based on Task object with added variables relevant to critical
+        * path algorithm. */
+
         println("CriticalPathHandler.createJobList -> Adding Jobs")
         for (task in taskList){
             if(task.status != Status.COMPLETE){

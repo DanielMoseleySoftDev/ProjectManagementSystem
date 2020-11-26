@@ -82,7 +82,6 @@ public class AddTeamForm extends CommonUIMethods{
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
-        //todo implement cancelButtonPressed
         System.out.println("AddTeamForm.cancelButtonPressed");
         onExit(mainFrame);
     }

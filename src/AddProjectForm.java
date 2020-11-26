@@ -70,14 +70,12 @@ public class AddProjectForm extends CommonUIMethods{
 
     //-------------------Methods----------------------------------------------------------------
     private void cancelButtonPressed(JFrame mainFrame) {
-        //todo implement cancelButtonPressed
         System.out.println("AddProjectForm.cancelButtonPressed");
         onExit(mainFrame);
 
     }
 
     private void addButtonPressed(MainGUI mainFrame) throws ParseException {
-        //todo implement addButtonPressed
         System.out.println("AddProjectForm.addButtonPressed");
         String projectName = projectNameTxt.getText();
         String description = descriptionTxt.getText();

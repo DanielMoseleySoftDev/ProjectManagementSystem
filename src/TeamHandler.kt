@@ -4,7 +4,6 @@ class TeamHandler {
 
     fun createTeam(teamName: String, teamDescription: String){
         teams.add(Team(teamName, teamDescription))
-        println("this works")
         saveTeams()
     }
 
@@ -21,8 +20,6 @@ class TeamHandler {
         teams.removeAt(teamIndex)
         saveTeams()
     }
-
-
 
     fun loadTeams() {
         teams = p.loadFromFile(true)
