@@ -91,7 +91,7 @@ class TaskHandler() {
             taskStr += i.taskName+", "
         }
         return if(taskStr.isNullOrBlank()){
-            "?"
+            ""
         }else{
             taskStr
         }
@@ -197,11 +197,9 @@ class TaskHandler() {
 
     }
 
-    fun editTask(taskName: String, newPreReq: String, newTeam: Team, newDays: Int, newDesc:String){
+    fun editTask(taskName: String, newTeam: Team, newDays: Int, newDesc:String){
         val taskToEdit = findTask(taskName)
-        val preReqList = getPreReq(newPreReq)
 
-        taskToEdit.preReqTasks = preReqList
         taskToEdit.teamAssigned = newTeam
         taskToEdit.estDays = newDays
         taskToEdit.taskDescription = newDesc

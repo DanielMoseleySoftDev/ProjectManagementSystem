@@ -14,7 +14,7 @@ public class EditTaskForm extends CommonUIMethods{
     private JTextField nameTxt;
     private JComboBox teamCombo;
     private JTextField preReqTxt;
-    private JTextField textField1;
+    private JTextField daysTxt;
     private JTextArea descriptionTxt;
     private JLabel daysLbl;
 
@@ -29,7 +29,9 @@ public class EditTaskForm extends CommonUIMethods{
         setResizable(false);
         setTitle("Add Task - Project Management System");
         populateComboBox();
+        populateTeamComboBox();
         tasksList = Main.taskHandler.getTasks();
+        selectionChange();
         setVisible(true);
 
         this.addWindowListener(new WindowAdapter() {
@@ -42,56 +44,62 @@ public class EditTaskForm extends CommonUIMethods{
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cancelButtonPressed();
+                cancelButtonPressed(mainFrame);
             }
         });
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateButtonPressed(mainFrame);
+                daysLbl.setForeground(Color.BLACK);
+                try {
+                    updateButtonPressed(mainFrame);
+                }catch(NumberFormatException f){
+                    System.out.println("Edit Task form - wrong format");
+                    daysLbl.setForeground(Color.RED);
+                }
             }
         });
         selectionCombo.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                daysLbl.setForeground(Color.BLACK);
                 if(e.getStateChange() == ItemEvent.SELECTED){
-                    try {
-                        selectionChange();
-                    }catch(NumberFormatException f){
-                        System.out.println("Edit Task form - wrong format");
-                        daysLbl.setForeground(Color.RED);
-                    }
+                    selectionChange();
                 }
             }
         });
     }
 
     private void updateButtonPressed(MainGUI mainFrame) {
-        //TODO implement
-        String preReq = preReqTxt.getText();
+
         String teamName = teamCombo.getSelectedItem().toString();
-        int estDays = Integer.parseInt(daysLbl.getText());
+        int estDays = Integer.parseInt(daysTxt.getText());
         String description = descriptionTxt.getText();
         Team team = Main.teamHandler.findTeam(teamName);
 
-        Main.taskHandler.editTask(nameTxt.getText(), preReq,team,estDays,description);
+        Main.taskHandler.editTask(nameTxt.getText(), team,estDays,description);
         mainFrame.updateTaskPanels();
         onExit(mainFrame);
 
     }
 
-    private void cancelButtonPressed() {
-        //TODO implement
+    private void cancelButtonPressed(MainGUI mainFrame) {
+        System.out.println("EditTaskForm.cancelButtonPressed");
+        onExit(mainFrame);
     }
 
 
     private void selectionChange() {
         for(int i = 0;i<tasksList.size();i++){
-            if(selectionCombo.getSelectedItem().toString().equals(tasksList.get(i).getTaskName())){
-                index = i;
+            Task task = tasksList.get(i);
+            if(selectionCombo.getSelectedItem().toString().equals(task.getTaskName())){
+                nameTxt.setText(task.getTaskName());
+                preReqTxt.setText(Main.taskHandler.getPreReqToString(task));
+                teamCombo.setSelectedItem(task.getTeamAssigned().getTeamName());
+                daysTxt.setText(Integer.toString(task.getEstDays()));
+                descriptionTxt.setText(task.getTaskDescription());
             }
         }
+
 
     }
 
@@ -100,6 +108,12 @@ public class EditTaskForm extends CommonUIMethods{
         System.out.println("TaskInfoForm.populateComboBox");
         for(int i=0;i<Main.taskHandler.getTasks().size();i++){
             selectionCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());
+        }
+    }
+
+    private void populateTeamComboBox() {
+        for (int i=0; i<Main.teamHandler.getTeams().size();i++) {
+            teamCombo.addItem(Main.teamHandler.getTeams().get(i).getTeamName());
         }
     }
 }

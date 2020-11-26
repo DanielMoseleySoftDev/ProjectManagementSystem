@@ -29,6 +29,7 @@ public class MainGUI extends JFrame{
     private JTextField daysLeftTxt;
     private JButton projectInfoButton;
     private JButton taskInfoButton;
+    private JButton editTaskButton;
     private DefaultTableModel activeModel;
     private DefaultTableModel waitingModel;
     private DefaultTableModel completeModel;
@@ -133,8 +134,13 @@ public class MainGUI extends JFrame{
                 taskInfoButtonPressed();
             }
         });
+        editTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editTaskButtonPressed();
+            }
+        });
     }
-
 
     //-----------------GUI METHODS----------------------------------------
     private void critPathAlgorithmChange() {
@@ -184,7 +190,8 @@ public class MainGUI extends JFrame{
         addTaskButton.setEnabled(loadedFlag);
         completeTaskButton.setEnabled(loadedFlag);
         deleteTaskButton.setEnabled(loadedFlag);
-        taskInfoButton.setEnabled((loadedFlag));
+        taskInfoButton.setEnabled(loadedFlag);
+        editTaskButton.setEnabled(loadedFlag);
         System.out.println("MainGui.toggleTaskOptionsEnabled -> Task Options Enabled = "+loadedFlag);
     }
 
@@ -290,6 +297,12 @@ public class MainGUI extends JFrame{
         //open the Task Info pop-out form when button pressed
         System.out.println("taskInfoButtonPressed");
         TaskInfoForm popout = new TaskInfoForm(this);
+        this.setEnabled(false);
+    }
+
+    private void editTaskButtonPressed() {
+        System.out.println("editInfoButtonPressed");
+        EditTaskForm popout = new EditTaskForm(this);
         this.setEnabled(false);
     }
 
