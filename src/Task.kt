@@ -2,7 +2,7 @@ import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
-data class Task(val taskName: String = "Task", val estDays: Int,  var teamAssigned: Team,var taskDescription: String, var preReqTasks: ArrayList<Task>) : Serializable {
+data class Task(val taskName: String = "Task", var estDays: Int,  var teamAssigned: Team,var taskDescription: String, var preReqTasks: ArrayList<Task>) : Serializable {
 
     var status = Status.NO_STATUS
 

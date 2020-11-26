@@ -197,6 +197,18 @@ class TaskHandler() {
 
     }
 
+    fun editTask(taskName: String, newPreReq: String, newTeam: Team, newDays: Int, newDesc:String){
+        val taskToEdit = findTask(taskName)
+        val preReqList = getPreReq(newPreReq)
+
+        taskToEdit.preReqTasks = preReqList
+        taskToEdit.teamAssigned = newTeam
+        taskToEdit.estDays = newDays
+        taskToEdit.taskDescription = newDesc
+
+        Main.projectHandler.saveProjects()
+    }
+
     private fun removeTaskFromPreReq(selectedTaskName: String) {
 
         println("TaskHandler.deleteTask.removeFromPreReq -> removing deleted task from pre-req's")
