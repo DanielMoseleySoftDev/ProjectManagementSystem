@@ -101,7 +101,7 @@ public class AddTaskForm extends CommonUIMethods{
             String teamName = teamCombo.getSelectedItem().toString();
             team = Main.teamHandler.findTeam(teamName);
             preReq = preReqTxt.getText();
-            //ArrayList<Task> preReqList = getPreReq();
+
             Main.taskHandler.createTask(taskName,estDays,team,taskDescription,preReq,mainFrame);
             onExit(mainFrame);
         } else{
@@ -112,6 +112,7 @@ public class AddTaskForm extends CommonUIMethods{
                 stopFlag = false;
             }
         }
+        stopFlag = false;
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {

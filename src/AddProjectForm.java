@@ -110,5 +110,6 @@ public class AddProjectForm extends CommonUIMethods{
                 stopFlag = false;
             }
         }
+        stopFlag = false;
     }
 }
