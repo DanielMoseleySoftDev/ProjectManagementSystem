@@ -29,7 +29,9 @@
         <children>
           <component id="dbb25" class="javax.swing.JTextArea" binding="descriptionTxt">
             <constraints border-constraint="Center"/>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+            </properties>
           </component>
           <vspacer id="e8526">
             <constraints border-constraint="North"/>
