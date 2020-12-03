@@ -135,7 +135,7 @@ class ProjectHandler() {
     }
 
     private fun setProjectTasks(){
-        Main.taskHandler.tasks = currentProject.Tasks
+        Main.taskHandler.tasks = currentProject.tasks
         println("ProjectHandler.selectProject -> Main.taskHandler.tasks set to currentProjects tasks:\n" + Main.taskHandler.tasks)
     }
 

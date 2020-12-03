@@ -25,9 +25,6 @@ public class AddProjectForm extends CommonUIMethods{
     private JLabel nameLbl;
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    private String projectName;
-    private Date startDate;
-    private String Description;
     public boolean stopFlag = false;
 
     public AddProjectForm(MainGUI mainFrame){

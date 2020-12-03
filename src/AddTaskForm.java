@@ -23,14 +23,11 @@ public class AddTaskForm extends CommonUIMethods{
     private JLabel nameLbl;
     private JLabel daysLbl;
     private String taskName;
-    private Date estStartDate;
-    private Date estFinishDate;
     private int estDays;
     private Team team;
     private String taskDescription;
     private String preReq;
     public boolean stopFlag = false;
-
 
     public AddTaskForm(MainGUI mainFrame){
 
@@ -126,34 +123,4 @@ public class AddTaskForm extends CommonUIMethods{
             teamCombo.addItem(Main.teamHandler.getTeams().get(i).getTeamName());
         }
     }
-
-
-
-    private ArrayList<Task> getPreReq() {
-
-        ArrayList<Task> returnList = new ArrayList<>();
-
-        if(preReq.isEmpty()){
-            return returnList;
-        }else{
-            //split the string
-            String[] temp = preReq.split(", ");
-            ArrayList<Task> thTask = Main.taskHandler.getTasks();
-
-            //loops through list of user input and checks them against each task in task handler
-            for(int i = 0; i< temp.length;i++){
-                for(int j=0;j<thTask.size();j++){
-                    if(temp[i] == thTask.get(j).getTaskName()) {
-                        returnList.add(thTask.get(j));
-                        System.out.println("Added Pre Req Task: " + thTask.get(j));
-                    }
-                }
-            }
-            return returnList;
-        }
-
-
-    }
-
-
 }

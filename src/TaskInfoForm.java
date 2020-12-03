@@ -5,7 +5,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class TaskInfoForm extends CommonUIMethods{
-    private JPanel taskInfoFormpanel;
+    private JPanel taskInfoFormPanel;
     private JPanel northPanel;
     private JPanel centerPanel;
     private JComboBox taskCombo;
@@ -13,8 +13,7 @@ public class TaskInfoForm extends CommonUIMethods{
 
 
     public TaskInfoForm(MainGUI mainFrame){
-
-        setContentPane(taskInfoFormpanel);
+        setContentPane(taskInfoFormPanel);
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -44,7 +43,6 @@ public class TaskInfoForm extends CommonUIMethods{
     }
 
     private void populateComboBox() {
-
         System.out.println("TaskInfoForm.populateComboBox");
         for(int i=0;i<Main.taskHandler.getTasks().size();i++){
             taskCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());

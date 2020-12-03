@@ -12,7 +12,6 @@ public class ProjectInfoForm extends CommonUIMethods{
     private JTextArea projectInfoTxt;
 
     public ProjectInfoForm(MainGUI mainFrame){
-
         setContentPane(projectInfoPanel);
         pack();
         setLocationRelativeTo(null);
@@ -22,19 +21,18 @@ public class ProjectInfoForm extends CommonUIMethods{
         selectionChange();
         setVisible(true);
 
-
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
                 onExit(mainFrame);
             }
         }); //unfreezes main gui when pop out is closed
+
         projectCombo.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
                     selectionChange();
                 }
-
             }
         });
     }
@@ -46,7 +44,6 @@ public class ProjectInfoForm extends CommonUIMethods{
     }
 
     private void populateComboBox(MainGUI mainFrame) {
-
         System.out.println("ProjectInfoForm.populateComboBox");
         if(Main.projectHandler.getProjects().size() != 0){
             for(int i=0;i<Main.projectHandler.getProjects().size();i++){
@@ -55,7 +52,6 @@ public class ProjectInfoForm extends CommonUIMethods{
         }else{
             JOptionPane.showMessageDialog(this, "No projects to show",
                     "Warning" ,JOptionPane.WARNING_MESSAGE);
-
         }
     }
 }

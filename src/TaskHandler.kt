@@ -1,5 +1,3 @@
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.swing.table.DefaultTableModel
 import kotlin.collections.ArrayList
 
@@ -174,7 +172,7 @@ class TaskHandler() {
 
         println("attempt at completing the task")
         println("found task Status -> ${foundTask.status}")
-        println("current project tasks -> "+Main.projectHandler.currentProject.Tasks)
+        println("current project tasks -> "+Main.projectHandler.currentProject.tasks)
         removeTaskFromPreReq(selectedTask)
 
         Main.projectHandler.saveProjects()

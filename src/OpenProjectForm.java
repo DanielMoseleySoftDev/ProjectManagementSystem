@@ -13,7 +13,6 @@ public class OpenProjectForm extends CommonUIMethods{
     private JButton cancelButton;
 
     public OpenProjectForm(MainGUI mainFrame) {
-
         setContentPane(openProjectPanel);
         pack();
         setLocationRelativeTo(null);
@@ -44,8 +43,6 @@ public class OpenProjectForm extends CommonUIMethods{
         });
     }
 
-
-
     //----------------Methods-----------------------------------------------
 
     private void populateComboBox() {
@@ -73,11 +70,9 @@ public class OpenProjectForm extends CommonUIMethods{
             JOptionPane.showMessageDialog(this,"No Projects.\nPlease create project first","Error: No Projects",JOptionPane.ERROR_MESSAGE);
             onExit(mainFrame);
         }
-
     }
 
     private void cancelButtonPressed(JFrame mainFrame) {
-
         System.out.println("OpenProjectForm.cancelButtonPressed");
         onExit(mainFrame);
     }

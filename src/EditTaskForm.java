@@ -19,7 +19,6 @@ public class EditTaskForm extends CommonUIMethods{
     private JLabel daysLbl;
 
     private ArrayList<Task> tasksList;
-    private int index;
 
     public EditTaskForm(MainGUI mainFrame){
 
@@ -70,7 +69,6 @@ public class EditTaskForm extends CommonUIMethods{
     }
 
     private void updateButtonPressed(MainGUI mainFrame) {
-
         String teamName = teamCombo.getSelectedItem().toString();
         int estDays = Integer.parseInt(daysTxt.getText());
         String description = descriptionTxt.getText();
@@ -79,14 +77,12 @@ public class EditTaskForm extends CommonUIMethods{
         Main.taskHandler.editTask(nameTxt.getText(), team,estDays,description);
         mainFrame.updateTaskPanels();
         onExit(mainFrame);
-
     }
 
     private void cancelButtonPressed(MainGUI mainFrame) {
         System.out.println("EditTaskForm.cancelButtonPressed");
         onExit(mainFrame);
     }
-
 
     private void selectionChange() {
         for(int i = 0;i<tasksList.size();i++){
@@ -99,12 +95,9 @@ public class EditTaskForm extends CommonUIMethods{
                 descriptionTxt.setText(task.getTaskDescription());
             }
         }
-
-
     }
 
     private void populateComboBox() {
-
         System.out.println("TaskInfoForm.populateComboBox");
         for(int i=0;i<Main.taskHandler.getTasks().size();i++){
             selectionCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());

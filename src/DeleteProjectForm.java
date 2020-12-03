@@ -61,9 +61,6 @@ public class DeleteProjectForm extends CommonUIMethods{
                     "Warning" ,JOptionPane.WARNING_MESSAGE);
             onExit(mainFrame);
         }
-
-
-
     }
 
     private void populateComboBox() {
@@ -72,5 +69,4 @@ public class DeleteProjectForm extends CommonUIMethods{
             projectCombo.addItem(Main.projectHandler.getProjects().get(i).getProjectName());
         }
     }
-
 }

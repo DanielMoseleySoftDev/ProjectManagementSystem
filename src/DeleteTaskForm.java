@@ -61,7 +61,6 @@ public class DeleteTaskForm extends CommonUIMethods{
                     "Warning" ,JOptionPane.WARNING_MESSAGE);
             onExit(mainFrame);
         }
-
     }
 
     private void populateComboBox() {
@@ -69,5 +68,4 @@ public class DeleteTaskForm extends CommonUIMethods{
             taskCombo.addItem(Main.taskHandler.getTasks().get(i).getTaskName());
         }
     }
-
 }
