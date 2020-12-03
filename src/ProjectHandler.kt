@@ -20,7 +20,6 @@ class ProjectHandler() {
     )
     var projectDuration = 0
 
-
     init {
         //load projects into memory
         loadProjects()
@@ -44,7 +43,6 @@ class ProjectHandler() {
             println("ProjectHandler.calculateCriticalPath -> No tasks to calculate")
             projectDuration = 0
         }
-
     }
 
     fun calculateEndDate(): String{
@@ -117,7 +115,6 @@ class ProjectHandler() {
         //Setting current project to the one chosen from OpenProjectForm
         var projectFound = false
         for (i in projects){
-
             if (i.projectName == selectedProjectStr){
                 currentProject = i
                 projectFound = true
@@ -125,7 +122,6 @@ class ProjectHandler() {
                 setProjectTasks()
                 break
             }
-
         }
 
         //print to console if no project is found

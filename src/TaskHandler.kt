@@ -112,12 +112,8 @@ class TaskHandler() {
             Status.COMPLETE -> {
                 "COMPLETE"
             }
-            else -> {
-                "ERROR"                 //the status could not be checked
-            }
         }
     }
-
 
     fun createTask(
         taskName: String = "Task",
@@ -163,12 +159,8 @@ class TaskHandler() {
     fun completeTask(selectedTask: String, mainFrame: MainGUI){
 
         val foundTask = findTask(selectedTask)
-        //val taskIndex = tasks.indexOf(foundTask)
-
 
         foundTask.status = Status.COMPLETE
-        println(foundTask.status)//checking if it works
-        //println(tasks[taskIndex].status)//checking if it works
 
         println("attempt at completing the task")
         println("found task Status -> ${foundTask.status}")
@@ -192,7 +184,6 @@ class TaskHandler() {
                 "Estimated Time: ${selectedTask.estDays} days\n" +
                 "Pre-Requisites: ${preReq}\n" +
                 "\nDescription: ${selectedTask.taskDescription}"
-
     }
 
     fun editTask(taskName: String, newTeam: Team, newDays: Int, newDesc:String){
@@ -244,7 +235,6 @@ class TaskHandler() {
                     println("ERROR: TaskHandler.calculateTaskStatus -> Pre-Req doesn't have status")
                 }
             }
-
         }
         else{
             if(task.status==Status.COMPLETE){
@@ -253,10 +243,7 @@ class TaskHandler() {
                 task.status = Status.ACTIVE
                 println("TaskHandler.calculateTaskStatus -> Status=ACTIVE")
             }
-
         }
-
-
     }
 
     private fun getPreReq(preReq: String): ArrayList<Task> {
@@ -281,6 +268,4 @@ class TaskHandler() {
             returnList
         }
     }
-
-
 }

@@ -16,7 +16,7 @@ class Persistence {
         try {
             //Lambda used to save to file
             ObjectOutputStream(FileOutputStream(projectFile)).use{ it -> it.writeObject(list)}
-        }catch (ioe:IOException){
+        }catch (ioe: IOException){
             println("Error: Unable to save - IO Exception")
         }
 
@@ -35,11 +35,9 @@ class Persistence {
         }
 
         println("List of Projects Saved to file\n")
-
     }
 
     fun loadFromFile(): ArrayList<Project> {
-
 
         println("-------------------------\n " +
                 "Load Started - File path: \n $projectFile " +
@@ -60,13 +58,10 @@ class Persistence {
             println("Error: Class not found to cast")
             return nullList
         }
-
-
         return projectList
     }
 
     fun loadFromFile(bool: Boolean): ArrayList<Team> {
-
 
         println("-------------------------\n " +
                 "Load Started - File path: \n $teamsFile " +
@@ -87,8 +82,6 @@ class Persistence {
             println("Error: Class not found to cast")
             return nullList
         }
-
-
         return teamList
     }
 }

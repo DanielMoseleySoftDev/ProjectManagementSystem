@@ -35,6 +35,5 @@ class TeamHandler {
     init{
         teams.add(Team("N/A","No team assigned"))
         loadTeams()
-        //saveTeams()
     }
 }
